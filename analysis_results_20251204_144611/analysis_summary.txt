@@ -1,0 +1,3530 @@
+CONSCIOUSNESS THEORY CLASSIFICATION ANALYSIS
+==================================================
+
+Analysis Date: 2025-12-04 14:46:11
+Total Items Processed: 211
+Model Used: deepseek/deepseek-v3.2
+
+Successful Classifications: 211
+Errors: 0
+
+CLASS DISTRIBUTION:
+--------------------
+UND: 188 (89.1%)
+COMP: 12 (5.7%)
+EMERG: 4 (1.9%)
+ENACT: 4 (1.9%)
+PAN: 2 (0.9%)
+PRED: 1 (0.5%)
+
+DETAILED RESULTS:
+--------------------
+
+Title: Sublime landscapes/Гибридные ландшафты
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.40
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.30
+  PAN: 0.00
+  EMERG: 0.20
+  UND: 0.70
+Evidence:
+  - technical_cue: AI работает с огромными датасетами, которые человек сам не может анализировать и использовать...
+  - technical_cue: художница выступает медиатором во взаимодействии между природным и цифровым...
+  - metaphor: в таком процессе буквально проявляются законы природы: изменчивость, уникальность каждого мгновения...
+----------------------------------------
+
+Title: All in all. Project
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.10
+  IIT: 0.20
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.90
+Evidence:
+  - metaphor: рассматривать весь набор произведений искусства как один целостный объект...
+  - technical_cue: технологии Neural Radiance Field. ИИ NeRF...
+----------------------------------------
+
+Title: Клеопатра. Перевод стихотворения А.С. Пушкина
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.20
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.10
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.90
+Evidence:
+  - technical_cue: обратиться за помощью к ИИ. Мы вместе слово за словом переводили это стихотворение...
+  - metaphor: попытка проникнуть в психологизм героев, исследовать ситуацию в момент наивысшего напряжения душевны...
+----------------------------------------
+
+Title: Киригами
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 1.00
+Evidence:
+----------------------------------------
+
+Title: Чувства машин
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.40
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.60
+Evidence:
+  - technical_cue: использует полученные данные для обучения машины интерпретации и воспроизведения эмоционального опыт...
+  - technical_cue: может ли процесс интерпретации чувств быть воспроизведён искусственной нейронной сетью...
+  - metaphor: Чувственное восприятие «программируется» через среду, культуру...
+----------------------------------------
+
+Title: Результат генерации по запросу
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 1.00
+Evidence:
+----------------------------------------
+
+Title: SafeCargo
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.40
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.60
+Evidence:
+  - technical_cue: Интеллектуальная программно-компьютерная система, в режиме реального времени обрабатывающая видеоизо...
+----------------------------------------
+
+Title: о боги в цветочек из машин vol.2
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 1.00
+Evidence:
+----------------------------------------
+
+Title: Untitled v.2
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.20
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.80
+Evidence:
+  - technical_cue: генерации видео диффузионными моделями...
+----------------------------------------
+
+Title: «Scores for the Virtual»,
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.20
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.80
+Evidence:
+  - technical_cue: методы генеративного машинного обучения...
+  - technical_cue: созданные с помощью StyleGAN2 ... и StarGAN2...
+  - technical_cue: методов искусственного интеллекта на основе Diffusion...
+----------------------------------------
+
+Title: Зритель
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.40
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.60
+Evidence:
+  - technical_cue: искусственный интеллект? Тот, что обучен распознавать изображение? Я выбрала нейросеть, обученную на...
+  - technical_cue: Это дает нам возможность задуматься о генерации смыслов....
+----------------------------------------
+
+Title: Кибернетическое бессмертие FIDONet
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.40
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.60
+Evidence:
+  - technical_cue: нейросети GPT, обученной на исторических архивах, генерирует бесконечную переписку виртуальных персо...
+  - metaphor: кибернетически-бессметными цифровыми двойниками людей прошлого, говорящими друг с другом изнутри сов...
+----------------------------------------
+
+Title: The Annals of Zadek Music
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.20
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.80
+Evidence:
+  - technical_cue: нейронные копии художника...
+----------------------------------------
+
+Title: Незримое
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.10
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.90
+Evidence:
+  - technical_cue: программный код, который создает 4-нотную систему...
+----------------------------------------
+
+Title: Синтетическое вдохновение
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.40
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.60
+Evidence:
+  - technical_cue: сотрудничестве с нейросетями...
+  - technical_cue: экспериментов с запросами (prompts)...
+----------------------------------------
+
+Title: VANITAS
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 1.00
+Evidence:
+----------------------------------------
+
+Title: Микромир в нейросетевой перспективе 
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.10
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.90
+Evidence:
+  - technical_cue: сгенерированных нейросетью...
+----------------------------------------
+
+Title: Искусственный Паразит
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.20
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.10
+  PAN: 0.00
+  EMERG: 0.10
+  UND: 0.90
+Evidence:
+  - technical_cue: соавтором становится искусственный интеллект, обученный на предыдущих работах художника...
+  - metaphor: Тело человека необратимо изменяется и приобретает новую форму...
+  - metaphor: Тело человека необратимо изменяется и приобретает новую форму...
+----------------------------------------
+
+Title: ОАО
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.40
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.60
+Evidence:
+  - technical_cue: для обучения нейросети StyleGAN2 были использованы внутренние документы... Затем у обученной модели ...
+  - metaphor: искусственный интеллект стал хуже делать свою работу – создавать похожие изображения, подобно челове...
+----------------------------------------
+
+Title: Realless
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.20
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.80
+Evidence:
+  - technical_cue: алгоритмы машинного зрения...
+  - technical_cue: сгенерированную искусственным интеллектом статью...
+----------------------------------------
+
+Title: «Духи.Бурятия»
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 1.00
+Evidence:
+----------------------------------------
+
+Title: Искусственные связи
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.20
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.80
+Evidence:
+  - technical_cue: эмоциональный искусственный интеллект...
+  - technical_cue: генеративных нейросетей, их способности выступать в качестве исполнителей прямых указаний...
+----------------------------------------
+
+Title: Девушка с сознанием компьютера
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.40
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.60
+Evidence:
+  - explicit: пьесы «Девушка с сознанием компьютера»...
+  - technical_cue: генерация портрета нейросетью...
+----------------------------------------
+
+Title: AI Expert Branding
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.20
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.80
+Evidence:
+  - technical_cue: онлайн-платформа на основе искусственного интеллекта, специально разработанная для того, чтобы макси...
+----------------------------------------
+
+Title: Семья, которой нет
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.20
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.80
+Evidence:
+  - technical_cue: созданы нейросетью...
+----------------------------------------
+
+Title: Это просто
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.40
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.60
+Evidence:
+  - technical_cue: Тексты написаны нейросетью, которая была обучена на кулинарных рецептах. Это позволяет ей структур...
+  - metaphor: А нейросети — это просто. Инструкция дает возможность получить «рецепты», инструкции к жизни....
+----------------------------------------
+
+Title: тут не место 
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.20
+  IIT: 0.00
+  PRED: 0.35
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.80
+Evidence:
+  - technical_cue: Нейронные сети анализируют огромные объемы данных и обрабатывают их, чтобы создать усредненное пред...
+  - technical_cue: создать усредненное представление визуальных элементов, характерных для нашего восприятия окружающег...
+  - metaphor: отражением нашего взгляда и интерпретации окружающей нас природы...
+----------------------------------------
+
+Title: Open for AI
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.20
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.10
+  EMERG: 0.00
+  UND: 0.90
+Evidence:
+  - technical_cue: компьютерный тест, используемый для определения, кем является пользователь системы: человеком или ко...
+  - metaphor: мир, населенный различными видами искусственной нематериальной жизни...
+----------------------------------------
+
+Title: chatouillers 
+Primary Class: COMP
+Confidence: medium
+Scores:
+  COMP: 0.80
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.40
+  UND: 0.00
+Evidence:
+  - explicit: нейросетевых алгоритмов для распознавания юмора по речи...
+  - explicit: Нейросеть обучалась на двух датасетах аудиоданных...
+  - explicit: нейросеть анализирует звук в пространстве и решает, смешно или не смешно...
+----------------------------------------
+
+Title: Черный пес
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 1.00
+Evidence:
+----------------------------------------
+
+Title: Ткань
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.35
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.10
+  UND: 0.90
+Evidence:
+  - technical_cue: С помощью нейронных сетей мы создаем алгоритм автоматического создания узоров...
+  - metaphor: Нейросетевое восприятие работает по аналогии с человеческим...
+  - metaphor: Два культурных кода: традиционный и нейронный — объединяются и сливаются в один, порождая новую визу...
+----------------------------------------
+
+Title: Режим дня современного художника 
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.40
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.60
+Evidence:
+  - technical_cue: это инструкция для роботов...
+  - metaphor: нужно быть действительно роботом, который не моется и не умывается, не чистит зубы не готовит еду, н...
+----------------------------------------
+
+Title: CURATIO LOCUS
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.20
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.40
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.60
+Evidence:
+  - technical_cue: обрабатывающие аудио- и фото-датасеты...
+  - technical_cue: Он решает, куда направить внимание...
+  - metaphor: центром притяжения является диалог гостя с интеллектом...
+----------------------------------------
+
+Title: Нейронный зоопарк
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.40
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.60
+Evidence:
+  - technical_cue: алгоритмы искусственных нейронных сетей...
+  - technical_cue: можно ли свести искусство к реорганизации данных...
+----------------------------------------
+
+Title: Жизнь и увядание в текущий момент вечности II
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.40
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.60
+Evidence:
+  - technical_cue: Визуальный ряд не записан заранее — его генерирует компьютерная программа...
+----------------------------------------
+
+Title: Svan/Nectar
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.20
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.40
+  PAN: 0.30
+  EMERG: 0.00
+  UND: 0.80
+Evidence:
+  - technical_cue: алгоритм оптического потока (optical flow) — метод машинного обучения для обработки видеоданных...
+  - technical_cue: алгоритм фильтрации и стилизации на основе нейросетей pix2pix, cycleGAN...
+  - technical_cue: растения реагируют на звуки насекомых-опылителей, увеличивая концентрацию сахара в своем нектаре...
+----------------------------------------
+
+Title: Резонанс
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.20
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.80
+Evidence:
+  - technical_cue: Изображения внутри инсталляции, созданные с помощью нейросетей, — это алгоритмическое представление ...
+  - technical_cue: Используя нейросетевые алгоритмы, инсталляция позволяет обеспечить непрерывное виртуальное погружени...
+----------------------------------------
+
+Title: INCLUSION MACHINE
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.40
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.60
+Evidence:
+  - technical_cue: в случае машины такие решения можно запрограммировать...
+  - technical_cue: Видеопоток... анализируется...
+----------------------------------------
+
+Title: Нерецепты
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.40
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.60
+Evidence:
+  - technical_cue: Нейросети, обученные анализировать и сочетать ингредиенты, создают уникальные рецепты...
+  - technical_cue: Насколько можно полагаться на алгоритмы при ее создании?...
+----------------------------------------
+
+Title: ПРИЗРАКОЛОГИЯ ЭКРАНА
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.20
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.80
+Evidence:
+  - technical_cue: технологий компьютерного зрения и определения образов...
+----------------------------------------
+
+Title: БЕСТИАРИЙ
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.20
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.80
+Evidence:
+  - technical_cue: генерация 3D-моделей с помощью нейронных сетей...
+  - technical_cue: нейросеть интерпретировала изображённые минималистичные карикатурные рисунки в трёхмерные формы...
+----------------------------------------
+
+Title: БЕСКОНЕЧНАЯ ИСТОРИЯ
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 1.00
+Evidence:
+----------------------------------------
+
+Title: За всем следят машины благодати и любви
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.40
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.40
+  UND: 0.80
+Evidence:
+  - technical_cue: искусственных нейронных сетей...
+  - technical_cue: Сеть была обучена с использованием миллионов изображений, а затем использована для воссоздания мира...
+  - metaphor: развитие технологических технологий стало таким сложным, что никто больше не может его остановить ил...
+----------------------------------------
+
+Title: Unsupervised
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.40
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.60
+Evidence:
+  - technical_cue: использует машинный интеллект в качестве помощника человеческого сознания, в частности алгоритмы DCG...
+  - technical_cue: обрабатывают их с помощью моделей классификации машинного обучения...
+----------------------------------------
+
+Title: Learning to See
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.40
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.60
+Evidence:
+  - technical_cue: нейросеть, которая через камеры наблюдения распознает все, что проносится у нее «перед глазами»...
+  - technical_cue: продолжает обучаться в режиме реального времени...
+----------------------------------------
+
+Title: Нейрочадо
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.20
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.10
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.90
+Evidence:
+  - technical_cue: С помощью технологий искусственного интеллекта родители создают речевые паттерны ребенка и его возмо...
+  - technical_cue: сигнальной наследственности (передача поведенческих навыков потомству через условный рефлекс подража...
+----------------------------------------
+
+Title: Neuroblot_1
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.20
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.80
+Evidence:
+  - technical_cue: искусственным интеллектом, представленным в неантропоморфной форме...
+  - technical_cue: видео генерируются на основе текстовых описаний — промптов...
+----------------------------------------
+
+Title: Мой Лимбо Лэнд. Часть I / Сон. Часть III / Завтрак
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.20
+  IIT: 0.10
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.40
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.80
+Evidence:
+  - technical_cue: ИИ-агент, который размышляет о своем существовании...
+  - technical_cue: исследование отношений между физическим телом и цифровым образом...
+  - technical_cue: как телесные ритуалы могут трансформироваться...
+----------------------------------------
+
+Title: mutatis mutandis
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.40
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.35
+  EMERG: 0.00
+  UND: 0.60
+Evidence:
+  - technical_cue: специально обученный алгоритм анализирует ваше тело. Нейронные сети решают, какие элементы вашего об...
+  - metaphor: Если мы не видим их, то как они видят нас? Какую «красоту» они могут воспринимать в нашем облике?...
+  - metaphor: растения сохраняют память о красоте исчезнувшего человека...
+----------------------------------------
+
+Title: Refraction No.1703
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.10
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.90
+Evidence:
+  - technical_cue: созданных с использованием ИИ-алгоритмов...
+----------------------------------------
+
+Title: Машинное Видение
+Primary Class: COMP
+Confidence: high
+Scores:
+  COMP: 0.90
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.10
+Evidence:
+  - technical_cue: алгоритмами компьютерного зрения, — технологией, которая позволяет машинам «видеть» и анализировать ...
+  - technical_cue: операционными изображениями — это визуальные паттерны, возникающие в процессе работы алгоритмов...
+  - technical_cue: ощутить скрытую работу алгоритмов...
+----------------------------------------
+
+Title: Дорогой Брат,…
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.20
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.10
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.90
+Evidence:
+  - technical_cue: камера для распознавания эмоций...
+  - technical_cue: При взаимодействии с инсталляцией...
+----------------------------------------
+
+Title: Демон
+Primary Class: COMP
+Confidence: high
+Scores:
+  COMP: 0.90
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.40
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.00
+Evidence:
+  - technical_cue: он выполняет точные вычисления...
+  - technical_cue: машинные вычисления преобразуются в визуальный образ...
+  - technical_cue: Демон становится результатом вычислительного процесса...
+----------------------------------------
+
+Title: Machine Hallucinations — The Sphere
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.40
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.60
+Evidence:
+  - technical_cue: необучаемый «машинный разум»...
+  - metaphor: может ли машина не только подражать реальности, но и воображать за её пределами...
+----------------------------------------
+
+Title: Deep Meditations: A brief history of almost everything in 60 minutes
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.40
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.60
+Evidence:
+  - technical_cue: созданный глубокой нейросетью; нейросеть обучена на субъективных представлениях...; изображения гене...
+----------------------------------------
+
+Title: nimiia cétiï
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.20
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.40
+  EMERG: 0.00
+  UND: 0.80
+Evidence:
+  - technical_cue: использует машинное обучение для генерации нового письменного и устного языка...
+  - metaphor: машина выступает медиумом, передающим сообщения от существ, которые обычно не могут говорить...
+----------------------------------------
+
+Title: The Wandering Mind: You start to wonder whether it's a dream
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.20
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.80
+Evidence:
+  - technical_cue: система отбирает и пересобирает фрагменты тысяч полевых записей, генерируя для спящих слушателей вит...
+----------------------------------------
+
+Title: MEMORY (Drawing Operations Unit Generation 2)
+Primary Class: COMP
+Confidence: medium
+Scores:
+  COMP: 0.70
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.30
+Evidence:
+  - technical_cue: модель рекуррентной нейросети...
+  - technical_cue: нейросеть с «внутренней памятью»...
+  - technical_cue: обученного на архиве её рисунков...
+----------------------------------------
+
+Title: Large Nature Model: Living Art
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.20
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.10
+  PAN: 0.00
+  EMERG: 0.10
+  UND: 0.90
+Evidence:
+  - technical_cue: использует мощные станции DGX A100 и GPU...
+  - metaphor: погружают зрителей в цифровой портрет экосистем Земли...
+  - metaphor: подчеркнуть взаимодействие технологий и природы...
+----------------------------------------
+
+Title: The Next Rembrandt
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.40
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.60
+Evidence:
+  - technical_cue: обучила глубокие нейронные сети и использовала методы распознавания лиц, чтобы сгенерировать новый п...
+----------------------------------------
+
+Title: Портрет Эдмона де Белами
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.40
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.60
+Evidence:
+  - technical_cue: с помощью генеративно‑соревновательной сети (GAN). Художники обучили алгоритм...
+  - technical_cue: генератор создавал новые изображения, а дискриминатор определял, чем они отличаются от работ человек...
+----------------------------------------
+
+Title: Mosaic Virus
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.40
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.60
+Evidence:
+  - technical_cue: для обучения алгоритма...
+  - technical_cue: ИИ генерирует видео...
+----------------------------------------
+
+Title: Sunspring
+Primary Class: COMP
+Confidence: medium
+Scores:
+  COMP: 0.70
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.30
+Evidence:
+  - technical_cue: при помощи рекуррентной нейронной сети...
+  - technical_cue: Алгоритм обучили на сценариях десятков научно‑фантастических фильмов...
+  - technical_cue: подчёркивая, что машина пока не понимает контекст...
+----------------------------------------
+
+Title: From “Apple” to “Anomaly”
+Primary Class: COMP
+Confidence: medium
+Scores:
+  COMP: 0.70
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.30
+Evidence:
+  - technical_cue: машины видят и упорядочивают мир...
+  - technical_cue: классификаций, встроенных в датасеты...
+  - technical_cue: исследует как машины видят и упорядочивают мир...
+----------------------------------------
+
+Title: Механопатия
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.20
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.80
+Evidence:
+  - technical_cue: энцефалографа, который приводит в действие роботизированные механизмы...
+----------------------------------------
+
+Title: Криофон
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.40
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.60
+Evidence:
+  - technical_cue: генерирует алгоритмическую композицию на основе данных, собранных в ходе протекающей реакции...
+  - technical_cue: Датчики регистрируют эти процессы, отправляя данные в процессор, который затем генерирует звук....
+----------------------------------------
+
+Title: Поля-2
+Primary Class: PAN
+Confidence: high
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.90
+  EMERG: 0.40
+  UND: 0.00
+Evidence:
+  - explicit: Поля 2.1 это попытка создания иллюзии присутствия сознания у неживой материи....
+  - explicit: художники выстраивают модель становления неодушевленной материи...
+  - technical_cue: в качестве признака, позволяющего зрителю интерпретировать “неодушевленное” в качестве “осознающего”...
+----------------------------------------
+
+Title: Чемоданы Иосифа Гамеля
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 1.00
+Evidence:
+----------------------------------------
+
+Title: Инкубатор жизни
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.35
+  PAN: 0.40
+  EMERG: 0.35
+  UND: 0.80
+Evidence:
+  - technical_cue: Макет позволяет не только рассмотреть, но потрогать руками и исследовать пластические свойства сущес...
+  - technical_cue: Объект дает возможность увидеть, услышать, почувствовать «дыхание почвы»....
+  - metaphor: Почва живет своей жизнью. Богатой и разнообразной. Захватывающей....
+----------------------------------------
+
+Title: Модель биометрических отражений
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.20
+  IIT: 0.10
+  PRED: 0.10
+  GWT: 0.10
+  ENACT: 0.40
+  PAN: 0.30
+  EMERG: 0.20
+  UND: 0.50
+Evidence:
+  - technical_cue: Один либо одновременно несколько зрителей могут войти в контакт с объектом посредством биологической...
+  - metaphor: попытаться «оживить» его...
+  - metaphor: объект может оживиться максимально — он задышит, «заскулит», замигает, зашевелится и т. д....
+----------------------------------------
+
+Title: Пространство вычислений
+Primary Class: COMP
+Confidence: high
+Scores:
+  COMP: 0.90
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.10
+Evidence:
+  - explicit: функциональная и точная модель, демонстрирующая логику работы нейронной сети...
+  - technical_cue: не зная алгоритмов этой работы, зритель не способен предугадать результат...
+  - technical_cue: Машина «отворачивается» от посетителя и осуществляет свои вычисления только для самой себя...
+----------------------------------------
+
+Title: Непонимание v 3.0
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.20
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.40
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.80
+Evidence:
+  - technical_cue: Изучая связь между движением и звуком, смыслом сказанного и его восприятием...
+  - technical_cue: Компьютер манипулирует их голосами: речь каждого записывается и изменяется в зависимости от его жест...
+  - technical_cue: Компьютер манипулирует их голосами: речь каждого записывается и изменяется...
+----------------------------------------
+
+Title: levelHead
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.35
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.65
+Evidence:
+  - technical_cue: стимулирующая развитие пространственной памяти, координации и воображения...
+  - technical_cue: интерфейсом игры служит реальный пластиковый куб... Изменяя положение куба, играющий направляет вирт...
+----------------------------------------
+
+Title: Клетка крупно
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.20
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.10
+  PAN: 0.00
+  EMERG: 0.40
+  UND: 0.80
+Evidence:
+  - technical_cue: Развиваясь самостоятельно...
+  - technical_cue: реализованы основные свойства живого: способность к размножению, способность к закреплению мутаций, ...
+  - technical_cue: двухмерная сетка, по которой передвигаются, размножаясь и поглощая друг друга, одноклеточные аниматы...
+----------------------------------------
+
+Title: Texmoca
+Primary Class: EMERG
+Confidence: high
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.90
+  UND: 0.00
+Evidence:
+  - technical_cue: Проект демонстрирует, как хаотическое перемешивание сменяется метаморфизмом самоорганизации, а части...
+  - technical_cue: При определенных условиях дым образует ячеистые структуры, форма и динамическое состояние которых за...
+  - metaphor: Это динамическая гармония, которую создает сама природа, свидетельство ее творческой силы....
+----------------------------------------
+
+Title: Phantom
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 1.00
+Evidence:
+----------------------------------------
+
+Title: Иллюзия цвета
+Primary Class: PRED
+Confidence: medium
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.70
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.30
+Evidence:
+  - technical_cue: мозг «видит» предзаданную картинку...
+  - metaphor: Ведь помидор должен быть красным!...
+----------------------------------------
+
+Title: Элвин
+Primary Class: COMP
+Confidence: high
+Scores:
+  COMP: 0.90
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.10
+  UND: 0.00
+Evidence:
+  - explicit: «Элвин» иллюстрирует работу мозга и нейронного компьютера....
+  - technical_cue: По принципу действия это — клеточный автомат, работа которого подчинена схеме искусственного нейрона...
+  - technical_cue: Каждая из них издает звук, характеристики которого зависят от сигналов, поступающих из других ячеек....
+----------------------------------------
+
+Title: SNIFF
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.20
+  IIT: 0.00
+  PRED: 0.35
+  GWT: 0.00
+  ENACT: 0.40
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.80
+Evidence:
+  - technical_cue: реагирует на жесты, изменение поведения и вовлеченность зрителя в происходящее...
+  - technical_cue: устанавливает с ним отношения, основанные на истории их взаимодействия...
+  - technical_cue: процессы тестирования и оценивания, которые запускаются каждый раз, когда что-то новое входит в сфер...
+----------------------------------------
+
+Title: Ткань жизни
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.40
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.60
+Evidence:
+  - technical_cue: программа обрабатывает изображение, осуществляя морфинг... и превращает получившееся изображение в у...
+  - technical_cue: Основой для алгоритма морфинга служит точечная матрица, построенная в результате анализа и проверки ...
+  - technical_cue: они делегируются машинам, алгоритмам и нейросетям...
+----------------------------------------
+
+Title: Нейронная сеть
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.20
+  IIT: 0.10
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.10
+  UND: 0.90
+Evidence:
+  - technical_cue: нейронной сети...
+  - technical_cue: структуру и устройство...
+----------------------------------------
+
+Title: Аудиобинокуляр
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.20
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.80
+Evidence:
+  - technical_cue: визуальная структура переводится в аудио по специально сконструированному алгоритму...
+  - technical_cue: Двухмерные координаты этих шести мух становятся данными для программы, превращающей числа в ноты....
+----------------------------------------
+
+Title: Внутри. Работа мозга
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 1.00
+Evidence:
+----------------------------------------
+
+Title: Нейронно-компьютерный интерфейс
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.20
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.40
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.80
+Evidence:
+  - technical_cue: преобразуют их в движение механизмов или компьютерные сигналы...
+  - technical_cue: позволяет пользователям ощутить в действительности эффективность применения виртуальных технологий...
+  - technical_cue: снимая сигналы физической или когнитивной активности человека...
+----------------------------------------
+
+Title: Динамическая модель клетки
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 1.00
+Evidence:
+----------------------------------------
+
+Title: Портреты клеток человека
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 1.00
+Evidence:
+----------------------------------------
+
+Title: Погружение в мозг
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 1.00
+Evidence:
+----------------------------------------
+
+Title: Каталог выставки ЖИЗНЬ.ВЕРСИЯ НАУКИ
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 1.00
+Evidence:
+----------------------------------------
+
+Title: Триалог
+Primary Class: EMERG
+Confidence: medium
+Scores:
+  COMP: 0.40
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.70
+  UND: 0.00
+Evidence:
+  - technical_cue: процесс непрерывных вычислений...
+  - technical_cue: Эта аутичная система, замкнутая на постоянное вычисление самой себя....
+  - technical_cue: Невозможно предсказать их траектории на длительном промежутке времени....
+----------------------------------------
+
+Title: Кибернетическая обезьяна (Jupiter)
+Primary Class: COMP
+Confidence: high
+Scores:
+  COMP: 0.90
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.40
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.00
+Evidence:
+  - explicit: искусственная нейронная сеть созданная на основе данных психофизиологических исследований...
+  - explicit: Алгоритм, способный к невербальной коммуникации...
+  - explicit: компьютерное моделирование человеческой психологии...
+----------------------------------------
+
+Title: Нейрогармониум
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.10
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.35
+  UND: 0.90
+Evidence:
+  - technical_cue: скрытые закономерности перестроения нервной ткани...
+  - technical_cue: гармонические соотношения в построении сложнейшей биологической структуры — головного мозга...
+----------------------------------------
+
+Title: Остаточный мыслепоток-4
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.40
+  IIT: 0.20
+  PRED: 0.10
+  GWT: 0.30
+  ENACT: 0.10
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.50
+Evidence:
+  - technical_cue: Данные, снятые прибором, обрабатывает специальная программа, написанная программистом... Программа в...
+  - technical_cue: изменяющийся поток которых воспринимается как нечто целостное...
+----------------------------------------
+
+Title: Внутри чёрной коробки
+Primary Class: COMP
+Confidence: high
+Scores:
+  COMP: 0.90
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.10
+  UND: 0.00
+Evidence:
+  - technical_cue: Каждый нейрон (светодиод) воздействует на все нейроны следующего слоя (фототранзисторы). И каждый фо...
+  - technical_cue: Задача сети предельно проста: распознавание символов в роении мух-дрозофил....
+  - technical_cue: Картинка с камеры превращается в линейку 122 разных напряжений для каждого светодиода входного слоя....
+----------------------------------------
+
+Title: Para-optic-8
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.10
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.40
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.90
+Evidence:
+  - technical_cue: человек начинает «смотреть» пальцами, на основе кожно-кинестезических ощущений оказывается возможна ...
+  - technical_cue: можно реализовать новый зрительный и пространственный опыт...
+----------------------------------------
+
+Title: To Bee
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.40
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.60
+Evidence:
+  - technical_cue: Умвельт, «окружающий мир», это основание для изучения коммуникации биологических видов. Икскюль гово...
+  - metaphor: их единственная функция — прямое действие...
+----------------------------------------
+
+Title: Мы видим, как ты слышишь
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 1.00
+Evidence:
+----------------------------------------
+
+Title: Аналоговый VR
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 1.00
+Evidence:
+----------------------------------------
+
+Title: Инверсия вещества
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.35
+  UND: 0.65
+Evidence:
+  - metaphor: процесс трансформации одного физического объекта в другой, во время которого оба приобретают свойств...
+----------------------------------------
+
+Title: infra
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.20
+  IIT: 0.10
+  PRED: 0.10
+  GWT: 0.00
+  ENACT: 0.35
+  PAN: 0.00
+  EMERG: 0.10
+  UND: 0.80
+Evidence:
+  - technical_cue: исполняется зрителем с помощью инструмента Videovox. Навигация по партитуре осуществляется с помощью...
+  - technical_cue: открытая система, в которой авторский партитурный световой генератор «pulsar»... используется в каче...
+  - technical_cue: кодирующий определённую последовательность звуковых волн...
+----------------------------------------
+
+Title: Слепой робот
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 1.00
+Evidence:
+----------------------------------------
+
+Title: 1,4...19
+Primary Class: EMERG
+Confidence: medium
+Scores:
+  COMP: 0.20
+  IIT: 0.10
+  PRED: 0.40
+  GWT: 0.00
+  ENACT: 0.30
+  PAN: 0.00
+  EMERG: 0.70
+  UND: 0.00
+Evidence:
+  - technical_cue: модели фазовых пространств, организующих себя и время внутри себя...
+  - technical_cue: будущее создается из взаимодействия реализованного и нереализованного прошлого...
+  - metaphor: жизненное пространство и текущее настоящее мыши формируется событиями из будущего...
+----------------------------------------
+
+Title: Министерство правды голубя мира
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.40
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.35
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.60
+Evidence:
+  - technical_cue: способность мысленно анализировать ряд стимулов и запоминать их, разбивая такой ряд на отрезки...
+  - technical_cue: существовании какого-то сложного аппарата расчета в центральной нервной системе голубей...
+  - technical_cue: какую форму обработки информации использует их мозг...
+----------------------------------------
+
+Title: О природе творчества
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 1.00
+Evidence:
+----------------------------------------
+
+Title: ПРОТЕЗИРОВАННАЯ ГОЛОВА
+Primary Class: ENACT
+Confidence: high
+Scores:
+  COMP: 0.40
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.90
+  PAN: 0.00
+  EMERG: 0.20
+  UND: 0.00
+Evidence:
+  - explicit: При этом Стеларк выступает против метафизического представления о том, что сознание – это отделимое ...
+  - technical_cue: Embodied Conversational Agents (ECAs) are about communicative behavior....
+  - technical_cue: With a vision system, The PROSTHETIC HEAD will also be able to detect the color of the user's clothi...
+----------------------------------------
+
+Title: Устройство для рисования мухами
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.10
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.35
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.90
+Evidence:
+  - metaphor: создаёт графические композиции, основанные на движениях комнатных мух...
+  - technical_cue: Микроконтроллер соединяет движения мух и движения рисующего устройства...
+----------------------------------------
+
+Title: TELE-PRESENT WIND
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.10
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.35
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.90
+Evidence:
+  - metaphor: система ретранслировала физическое представление динамических и текучих условий окружающей среды...
+----------------------------------------
+
+Title: РЕГИСТРАТОР РОСТА
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.35
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.90
+Evidence:
+  - technical_cue: растение растет... аппарат реагирует на его рост, создавая растровое изображение... система живет св...
+----------------------------------------
+
+Title: Content Aware Studies
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.40
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.60
+Evidence:
+  - technical_cue: генерация ... посредством алгоритмического анализа машинного обучения...
+  - technical_cue: алгоритм генерирует трехмерные модели недостающих фрагментов...
+  - metaphor: воскрешение утраченных фрагментов ... в символическом смысле...
+----------------------------------------
+
+Title: Музей гидропоники
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 1.00
+Evidence:
+----------------------------------------
+
+Title: Прометей
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 1.00
+Evidence:
+----------------------------------------
+
+Title: Проекция интервала
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.35
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.90
+Evidence:
+  - technical_cue: потенциал прочтения появляется только тогда, когда различные виды взаимодействий становятся составно...
+  - technical_cue: сплав присутствия человека и географической / ландшафтной составляющей; миграция человека по освоени...
+----------------------------------------
+
+Title: Капсула времени "Башня"
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.10
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.90
+Evidence:
+  - technical_cue: открытый для считывания информации...
+----------------------------------------
+
+Title: Свободу!
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.20
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.80
+Evidence:
+  - technical_cue: по специальной программе создает рисунок...
+----------------------------------------
+
+Title: Неспешность
+Primary Class: ENACT
+Confidence: high
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.90
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.00
+Evidence:
+  - technical_cue: управляет видеозаписью, которую он наблюдает в видео-очках, посредством движений своего тела...
+  - technical_cue: контактует не только искусственной реальности в очках, но и аудитории, которая реагирует на его дейс...
+----------------------------------------
+
+Title: Серебряные облака
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 1.00
+Evidence:
+----------------------------------------
+
+Title: Открытая документация
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 1.00
+Evidence:
+----------------------------------------
+
+Title: Кибершлем "Глюк"
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.20
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.40
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.80
+Evidence:
+  - technical_cue: Зритель передвигается по выставочному залу... Датчики улавливают скорость движения зрителя... сигнал...
+  - technical_cue: сигнал трансформируется в психоделический зрительный образ...
+----------------------------------------
+
+Title: Прилив
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.35
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.65
+Evidence:
+  - technical_cue: «оживают» от человеческих шагов...
+  - metaphor: оживают...
+----------------------------------------
+
+Title: Игра в войну
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 1.00
+Evidence:
+----------------------------------------
+
+Title: Модель биполярной активности
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 1.00
+Evidence:
+----------------------------------------
+
+Title: Газировка
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 1.00
+Evidence:
+----------------------------------------
+
+Title: Лужайка
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.20
+  IIT: 0.10
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.40
+  UND: 0.80
+Evidence:
+  - technical_cue: компьютеризированных стеклянных боксов...
+  - technical_cue: управляемую электроникой...
+  - metaphor: все элементы «Лужайки» вместе создают единую динамическую медиаскульптуру...
+----------------------------------------
+
+Title: Клиника
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.20
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.10
+  PAN: 0.30
+  EMERG: 0.20
+  UND: 0.90
+Evidence:
+  - metaphor: оживляет неживую природу...
+  - metaphor: начинают жить своей жизнью...
+  - technical_cue: вживляет электронные механизмы...
+----------------------------------------
+
+Title: Alien Space
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.35
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.65
+Evidence:
+  - technical_cue: Находясь в инсталляции, посетитель постоянно погружен в поток ясных и расплывчатых изображений, что ...
+  - technical_cue: Оно реагирует на все внешние раздражители, а также на внутренние изменения – каждое движение посетит...
+----------------------------------------
+
+Title: Кибер-Пушкин 1.0 бета
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.40
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.60
+Evidence:
+  - technical_cue: компьютерной программой «Кибер-Пушкин 1.0 бета», производящей русскоязычные стихи на основе обширной...
+  - technical_cue: Стихи генерируются автоматически, без участия человека....
+----------------------------------------
+
+Title: Нормализующая машина
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.40
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.60
+Evidence:
+  - technical_cue: зрители обучают нейросеть определять «нормальность» человека...
+  - technical_cue: нейросеть сможет вычислить, насколько «нормальным» является сам зритель...
+----------------------------------------
+
+Title: Параллелоид
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.35
+  GWT: 0.00
+  ENACT: 0.45
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.60
+Evidence:
+  - technical_cue: Как отклонение вертикальной оси влияет на восприятие человеческого мозга?...
+  - technical_cue: моделирует иллюзию отклонения от вертикальной оси...
+  - technical_cue: Проект исследует работу вестибулярного аппарата человека....
+----------------------------------------
+
+Title: Простейшие
+Primary Class: EMERG
+Confidence: medium
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.70
+  UND: 0.30
+Evidence:
+  - technical_cue: Возбуждение одного передается остальным, через несколько секунд коллективная истерика охватывает вес...
+  - metaphor: коллективная истерика охватывает весь микросоциум...
+  - metaphor: Они похожи на нас....
+----------------------------------------
+
+Title: АКТ или симфония для 8 диапроекторов
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.20
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.10
+  ENACT: 0.30
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.90
+Evidence:
+  - technical_cue: Всей этой симфонией дирижирует компьютер «Макинтош»....
+  - technical_cue: Зритель выбирает из калейдоскопического изобилия изображений те картинки, которые ему нравятся, таки...
+----------------------------------------
+
+Title: Pelicula
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.20
+  IIT: 0.10
+  PRED: 0.10
+  GWT: 0.20
+  ENACT: 0.40
+  PAN: 0.00
+  EMERG: 0.50
+  UND: 0.60
+Evidence:
+  - technical_cue: Любое движение в «поле зрения» камеры организует мечущиеся на плёнке буквы в единый текст. Созидание...
+  - metaphor: Созидание порядка из хаоса....
+  - technical_cue: Сотворение образа через движение, активность субъекта созерцания....
+----------------------------------------
+
+Title: Секретная машина
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 1.00
+Evidence:
+----------------------------------------
+
+Title: Чрево беременного мужчины
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 1.00
+Evidence:
+----------------------------------------
+
+Title: ЗВУК0В0Й МИР
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.20
+  IIT: 0.10
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.35
+  PAN: 0.00
+  EMERG: 0.25
+  UND: 0.80
+Evidence:
+  - technical_cue: живого звука, создаваемого зрителем, входящим в это пространство...
+  - technical_cue: сердцебиения зрителя, регистрируемого в реальном времени...
+  - metaphor: Иногда это выглядит произвольно, иногда – организованно и похоже на конфигурации, встречающиеся в пр...
+----------------------------------------
+
+Title: Поделись своими вибрациями
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 1.00
+Evidence:
+----------------------------------------
+
+Title: Кино глаз / Кино правда
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 1.00
+Evidence:
+----------------------------------------
+
+Title: Нейросказки
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.20
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.80
+Evidence:
+  - technical_cue: искусственный интеллект ее продолжит и сгенерирует видео на основе полученного текста...
+----------------------------------------
+
+Title: Звук без оков: Искусство и эстетика звука в 21-ом веке
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 1.00
+Evidence:
+----------------------------------------
+
+Title: Эхолокация
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.40
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.60
+Evidence:
+  - metaphor: инструменты реагируют на резонансные частоты комнаты, доводя до внимания слушателя звуковые качества...
+----------------------------------------
+
+Title: Электрический инопланетянин
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 1.00
+Evidence:
+----------------------------------------
+
+Title: Новые медиа-титры
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 1.00
+Evidence:
+----------------------------------------
+
+Title: Phono Tactics: Тактические упражнения для терменвокса
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 1.00
+Evidence:
+----------------------------------------
+
+Title: Магазин "БУДДАБРОТ"
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.10
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.90
+Evidence:
+  - technical_cue: создают цифровые скульптуры, образованные в результате имитированной покупки на сети...
+----------------------------------------
+
+Title: Мишень
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 1.00
+Evidence:
+----------------------------------------
+
+Title: На дне
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.10
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.90
+Evidence:
+  - technical_cue: подобие компьютерной заставки-скринсейвера...
+----------------------------------------
+
+Title: С легким паром
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 1.00
+Evidence:
+----------------------------------------
+
+Title: sonARC::ION – Пролог
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 1.00
+Evidence:
+----------------------------------------
+
+Title: Идеальная буря
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.35
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.65
+Evidence:
+  - technical_cue: присутствие зрителя является катализатором, заставляющим бурю набирать или терять силу...
+  - technical_cue: Зритель играет активную роль в сдерживании или раздувании ветра...
+----------------------------------------
+
+Title: Механические жуки или "Взрослые игрушки"
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 1.00
+Evidence:
+----------------------------------------
+
+Title: Вечность
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 1.00
+Evidence:
+----------------------------------------
+
+Title: Лампофон
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 1.00
+Evidence:
+----------------------------------------
+
+Title: Мы здесь
+Primary Class: PAN
+Confidence: high
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.90
+  EMERG: 0.00
+  UND: 0.10
+Evidence:
+  - explicit: элементарная аудиозапись будит в душе современного человека древний анимизм – все живые, всё живое....
+  - metaphor: Кто они, невидимые? Гении места? Узники старой крепости? Домовые, лешие, барабашки? Жильцы нашей пам...
+  - technical_cue: Мы здесь, мы всегда здесь, мы рядом с тобой, – напоминают эти звуки....
+----------------------------------------
+
+Title: Обзор за неделю
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 1.00
+Evidence:
+----------------------------------------
+
+Title: Carte Blanche
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.20
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.35
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.80
+Evidence:
+  - technical_cue: сами слушатели оказываются непосредственными исполнителями концерта...
+  - technical_cue: реагируя на обнаруживаемые движения...
+  - technical_cue: основана на трансформации изображения, считываемого веб-камерой, в звук...
+----------------------------------------
+
+Title: Рыба
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 1.00
+Evidence:
+----------------------------------------
+
+Title: Твари дрожащие
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.35
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.90
+Evidence:
+  - metaphor: жизнь есть движение...
+  - technical_cue: приводимые в движение – вернее, в дрожание – любым передвижением или жестом зрителя...
+----------------------------------------
+
+Title: Промахнулся, пиная?
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.35
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.90
+Evidence:
+  - technical_cue: Действие посетителя, как и результат этого действия, перемещается в виртуальный мир в реальном време...
+  - technical_cue: Посетители в реальном мире сами будут пинать стулья...
+----------------------------------------
+
+Title: Мобильные сеансы в Лионе и в Москве
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 1.00
+Evidence:
+----------------------------------------
+
+Title: Зимние цикады
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 1.00
+Evidence:
+----------------------------------------
+
+Title: Navigator
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.20
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.80
+Evidence:
+  - technical_cue: генерирует с помощью нейронных сетей...
+----------------------------------------
+
+Title: Яркий огонь и одолженные слезы
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 1.00
+Evidence:
+----------------------------------------
+
+Title: Код
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.20
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.80
+Evidence:
+  - technical_cue: код (баркодом). Расшифровав его с помощью технического устройства, получаем значение...
+----------------------------------------
+
+Title: gogatsuByo
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.20
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.80
+Evidence:
+  - technical_cue: художники играют с числами, компьютерными интерфейсами и словесными командами...
+----------------------------------------
+
+Title: Память зеркала
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 1.00
+Evidence:
+----------------------------------------
+
+Title: Остановка света
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.20
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.80
+Evidence:
+  - technical_cue: Нейросеть StyleGAN2, натренированная на изображениях церквей, переучивается на датасете из внутриигр...
+----------------------------------------
+
+Title: Картонная капель
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.35
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.65
+Evidence:
+  - technical_cue: Для зрителя смотреть телевизор «лицом вверх» не совсем естественно, но это самый естественный способ...
+  - technical_cue: Зрителям следует сдерживать порыв уклониться от капель (поскольку реальной опасности замочить лицо н...
+----------------------------------------
+
+Title: Фильтрация белого шума
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.35
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.65
+Evidence:
+  - technical_cue: изображение интерактивно связано с движением зрителя...
+  - metaphor: Он «пробуждает к жизни» реальность и отражение реальности и превращает «ничто» в «нечто»...
+  - metaphor: Уходит наблюдатель – уходит свет – уходит тень – исчезает мир...
+----------------------------------------
+
+Title: Таксономия
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.20
+  IIT: 0.10
+  PRED: 0.10
+  GWT: 0.10
+  ENACT: 0.20
+  PAN: 0.10
+  EMERG: 0.10
+  UND: 0.80
+Evidence:
+  - technical_cue: черных ящиков, в то же время остается скрытым от зрителей эффективное назначение самих устройcтв...
+  - technical_cue: Surface, that shape the logic of the black box with an encoding to be deciphered...
+  - metaphor: посредника между объектом и окружением...
+----------------------------------------
+
+Title: Фильтры и отфильтрованное
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.35
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.25
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.60
+Evidence:
+  - technical_cue: Все в этой инсталляции «играется» на компьютере, благодаря чему решения о ритме и высоте звука прини...
+  - technical_cue: архитектура зала становится частью структуры музыки, соединяя физическое пространство со временем...
+----------------------------------------
+
+Title: Невыносимая легкость
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 1.00
+Evidence:
+----------------------------------------
+
+Title: Жизнь — игра
+Primary Class: COMP
+Confidence: high
+Scores:
+  COMP: 0.90
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.40
+  UND: 0.00
+Evidence:
+  - explicit: основана на принципах клеточного автомата...
+  - explicit: частью дискурса о взаимодействии человека с машиной и обоснования вычислительных парадигм...
+  - technical_cue: искусственной жизни алгоритм...
+----------------------------------------
+
+Title: Ничего нового
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 1.00
+Evidence:
+----------------------------------------
+
+Title: Те, кто уходят, и те, кто остаются
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 1.00
+Evidence:
+----------------------------------------
+
+Title: 7-й этаж без лифта
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 1.00
+Evidence:
+----------------------------------------
+
+Title: Облако, которое пахнет голубым
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.20
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.40
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.80
+Evidence:
+  - technical_cue: сплетено программированием...
+  - technical_cue: ощутимое, осязаемое взаимодействие...
+----------------------------------------
+
+Title: Катаринка
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 1.00
+Evidence:
+----------------------------------------
+
+Title: Рефракция взаимных резонансов
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.35
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.90
+Evidence:
+  - technical_cue: активирует участие зрителей...
+  - technical_cue: интерактивное формирование звука стать визуальной штриховкой через взаимную звуковую игру...
+  - technical_cue: ways of communicating collectively will be echoed in the way that the triangles are hung and interac...
+----------------------------------------
+
+Title: Руки
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.35
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.65
+Evidence:
+  - metaphor: он держит его в руках, создавая свое произведение искусства. А иногда, как здесь, это делается прост...
+  - technical_cue: Какой бы инструмент художник ни использовал — кисть, резец, компьютер — он держит его в руках...
+----------------------------------------
+
+Title: Поднимаясь I
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 1.00
+Evidence:
+----------------------------------------
+
+Title: Бегущие
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.40
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.35
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.50
+Evidence:
+  - technical_cue: страна алгоритмического разума...
+  - technical_cue: умы и тела XXI века, существующие в пористой структуре идеальных природной и технологической обстано...
+  - metaphor: бегущая по середине шоссе, еще не лишенная естественности...
+----------------------------------------
+
+Title: На птичьей волне
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 1.00
+Evidence:
+----------------------------------------
+
+Title: TDHN0F005
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.20
+  IIT: 0.10
+  PRED: 0.10
+  GWT: 0.00
+  ENACT: 0.40
+  PAN: 0.10
+  EMERG: 0.10
+  UND: 0.80
+Evidence:
+  - technical_cue: Пьезодатчики, при взаимодействии с человеком, передают сигналы ... значения колебаний от соприкоснов...
+  - metaphor: техно-диалектах, перепрограммирующих вселенную и изменчивых, как агрегатные состояния вещества...
+----------------------------------------
+
+Title: Фанерон
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.35
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.65
+Evidence:
+  - technical_cue: Устанавливая количество активных элементов, взаимодействуя с ними в пространстве, вы, как оператор, ...
+  - metaphor: пользователь в роли оператора погружается в «Фанерон» на различную глубину...
+----------------------------------------
+
+Title: Dream Routes
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.35
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.65
+Evidence:
+  - metaphor: Каждый день мы ходим привычными маршрутами. Возможно, на этих промежутках пространства и рождаются н...
+  - technical_cue: Участники перформанса рисовали на прозрачных листах свои привычные маршруты... информация о количест...
+----------------------------------------
+
+Title: TDHN0F002
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.20
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.10
+  PAN: 0.30
+  EMERG: 0.00
+  UND: 0.80
+Evidence:
+  - metaphor: оживлён...
+  - technical_cue: генеративные схемы воспроизведения звука...
+----------------------------------------
+
+Title: TELEHYDRA
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.40
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.60
+Evidence:
+  - technical_cue: Захватывая внимание людей, социальные сети делают из них рабов....
+  - metaphor: метафора сути современных методов управления массовым сознанием...
+----------------------------------------
+
+Title: Кубас
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.20
+  IIT: 0.10
+  PRED: 0.10
+  GWT: 0.00
+  ENACT: 0.35
+  PAN: 0.25
+  EMERG: 0.10
+  UND: 0.80
+Evidence:
+  - technical_cue: симбиоз с техникой дает глубже проанализировать и получить данные от обработанных стихиями предметов...
+  - metaphor: Произведение будто изучает себя само...
+  - metaphor: Так мы слышим «память следов, оставленных странствиями по морю»....
+----------------------------------------
+
+Title: Be Flexible
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 1.00
+Evidence:
+----------------------------------------
+
+Title: TDHN0F003
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.20
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.10
+  PAN: 0.30
+  EMERG: 0.00
+  UND: 0.80
+Evidence:
+  - metaphor: оживлён...
+  - technical_cue: генеративные схемы воспроизведения звука...
+  - technical_cue: Световое воздействие на объект влияет на громкость воспроизведения записанного звука через количеств...
+----------------------------------------
+
+Title: Инстинкт пробуждения
+Primary Class: ENACT
+Confidence: high
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.90
+  PAN: 0.00
+  EMERG: 0.10
+  UND: 0.00
+Evidence:
+  - explicit: Неразрывное единство души и тела и их коммуникация составило философскую и практическую основу для б...
+  - technical_cue: психическая травма образуется вследствие незавершенной инстинктивной реакции организма на травматиче...
+  - technical_cue: Через подрагивание мышечных тканей организм регулирует возбуждение нервной системы. Этот циклический...
+----------------------------------------
+
+Title: Без названия
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.20
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.40
+  UND: 0.80
+Evidence:
+  - technical_cue: звук синтезируется в нескольких десятках осцилляторах в патче Pure Data на основании случайно генери...
+  - metaphor: в какой момент эта форма теряется и становится шумом и хаосом...
+  - metaphor: процессы управления случайностью, совпадениями...
+----------------------------------------
+
+Title: То, что живет во мне
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.10
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.35
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.90
+Evidence:
+  - technical_cue: информация ... зависит от поведения улиток — динамики их перемещения в террариуме, интенсивности общ...
+  - metaphor: метафору дома-ракушки, которую несет на себе улитка...
+----------------------------------------
+
+Title: Девушки Тиллера
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.20
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.10
+  PAN: 0.00
+  EMERG: 0.10
+  UND: 0.90
+Evidence:
+  - technical_cue: программного обеспечения, обладающего творческим потенциалом...
+  - technical_cue: за счет усовершенствованных конструкций тел...
+  - technical_cue: способных осуществлять согласованные «ритмичные пластические движения»...
+----------------------------------------
+
+Title: Faces2Voices
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.40
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.10
+  UND: 0.50
+Evidence:
+  - technical_cue: с помощью нейронной сети генерируют изображение лица человека на основе семпла его речи...
+  - technical_cue: с помощью ИИ генерируют воображаемые голоса людей на основе алгоритмов распознавания лиц...
+  - technical_cue: алгоритмическую музыкальную композицию...
+----------------------------------------
+
+Title: Алгоритмическая эстетика
+Primary Class: COMP
+Confidence: medium
+Scores:
+  COMP: 0.80
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.20
+Evidence:
+  - technical_cue: используя видео обработанные алгоритмами компьютерного зрения для получения характерного паттерна оп...
+  - technical_cue: формируют алгоритм машинного восприятия мира...
+  - technical_cue: Работа использует и исследует паттерны компьютерного зрения в контексте алгоритмической эстетики....
+----------------------------------------
+
+Title: Codex Virtualis Genesis
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.10
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.40
+  UND: 0.60
+Evidence:
+  - metaphor: формы жизни будут мутировать и эволюционировать...
+  - technical_cue: виртуально смоделированных организмов на основе клеточных автоматов...
+----------------------------------------
+
+Title: manifesting latent space
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.40
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.30
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.50
+Evidence:
+  - technical_cue: нейронной сети...
+  - technical_cue: тренировочном массиве данных...
+  - technical_cue: латентного пространства...
+----------------------------------------
+
+Title: Sole Soil
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.35
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.65
+Evidence:
+  - technical_cue: тактильные взаимодействия...
+  - metaphor: вступая в режим диалога с чувствительной поверхностью Земли...
+----------------------------------------
+
+Title: text2pixelart
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.20
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.80
+Evidence:
+  - technical_cue: нейросетевых архитектур (CLIP, diffvg) для автоматической генерации изображений и видео на основе те...
+----------------------------------------
+
+Title: Нооскоп
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.40
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.60
+Evidence:
+  - technical_cue: объясняя базовые принципы работы нейросетей...
+  - metaphor: искусственный интеллект через метафору оптического инструмента...
+----------------------------------------
+
+Title: Зловещее зеркало
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.40
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.60
+Evidence:
+  - technical_cue: нейросеть обучается в процессе взаимодействия...
+  - technical_cue: исследует характерную эстетику нейронных сетей...
+----------------------------------------
+
+Title: Синтетическая морфология
+Primary Class: ENACT
+Confidence: high
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.90
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.10
+Evidence:
+  - technical_cue: носомых роботизированных протезов (тентаклей), управляемых мышцами тела человека и электронными устр...
+  - technical_cue: Где тело заканчивается? Совпадают ли его физические границы с функциональными границами? В какой сте...
+  - technical_cue: Какую роль играют технологии в установлении и поддержании этих границ?...
+----------------------------------------
+
+Title: QUORUM SENSING
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 1.00
+Evidence:
+----------------------------------------
+
+Title: Зеленый шум
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.35
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.90
+Evidence:
+  - technical_cue: таблички реагируют на звуки, записанные заранее в городской среде...
+  - technical_cue: Принцип работы поворотных табличек имитирует работу базилярной мембраны внутреннего уха — структуры,...
+  - metaphor: которые разворачиваются у вас перед глазами и в ваших ушах...
+----------------------------------------
+
+Title: Символизм в электросхемах. Божественная комедия
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.20
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.80
+Evidence:
+  - technical_cue: Мы расшифровываем эти символы и создаем устройства, адекватные зашитым в них текстам...
+  - metaphor: переводим поэму не построчно, а как схему схемы...
+----------------------------------------
+
+Title: PLANTOVERSE 2.0
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.35
+  PAN: 0.40
+  EMERG: 0.00
+  UND: 0.60
+Evidence:
+  - technical_cue: возможно ли сместить фокус со своего отражения на растительную идентичность?...
+  - technical_cue: посмотреть на себя через оптику растительного организма...
+  - metaphor: эпидермальные клетки листьев растений являются линзами — микроскопическими «глазками»...
+----------------------------------------
+
+Title: ARBOR
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.20
+  IIT: 0.10
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.10
+  PAN: 0.30
+  EMERG: 0.40
+  UND: 0.80
+Evidence:
+  - technical_cue: обрабатываются машинными алгоритмами...
+  - metaphor: понятие живого включает как биологические, так и технологические формы...
+  - technical_cue: придания биологической сложности неорганическому объекту...
+----------------------------------------
+
+Title: PETRA
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.35
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.90
+Evidence:
+  - technical_cue: каждый объект уникален и создан во взаимодействии с окружающей средой...
+  - metaphor: воплощает экологическое агентство...
+----------------------------------------
+
+Title: Танцующий лес
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.35
+  EMERG: 0.00
+  UND: 0.90
+Evidence:
+  - metaphor: нечеловеческих агентов...
+  - metaphor: воображаемого метафизического танца...
+----------------------------------------
+
+Title: Архитектура и микроорганизмы
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 1.00
+Evidence:
+----------------------------------------
+
+Title: Первое движимое
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.00
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 1.00
+Evidence:
+----------------------------------------
+
+Title: «RAP» ( Художник автоматического действия)
+Primary Class: UND
+Confidence: low
+Scores:
+  COMP: 0.40
+  IIT: 0.00
+  PRED: 0.00
+  GWT: 0.00
+  ENACT: 0.00
+  PAN: 0.00
+  EMERG: 0.00
+  UND: 0.60
+Evidence:
+  - technical_cue: автономный робот, наделенный искусственным интеллектом...
+  - technical_cue: Решение об окончании работы над произведением он принимает, исходя из продолжительности творческого ...
+----------------------------------------
