@@ -13,7 +13,7 @@ import seaborn as sns
 from dotenv import load_dotenv
 import time
 import warnings
-from typing import Dict, List
+from typing import Dict, List, Optional
 
 from metaphor_analyzer import (
     MetaphorAnalyzer,
@@ -250,7 +250,7 @@ class EnhancedMetaphorClassifier:
             ]
         }
 
-    def classify_description(self, description: str, max_retries: int = 3) -> dict:
+    def classify_description(self, description: str, max_retries: int = 3) -> Dict:
         """
         Classify with enhanced metaphor analysis
         """
@@ -343,7 +343,7 @@ class EnhancedMetaphorClassifier:
             print(f"Error processing Excel file: {e}")
             raise
 
-    def classify_batch(self, descriptions: list[str], titles: list[str] = None) -> list[dict]:
+    def classify_batch(self, descriptions: List[str], titles: Optional[List[str]] = None) -> List[Dict]:
         """Classify multiple descriptions"""
         results = []
 
@@ -371,7 +371,7 @@ class EnhancedMetaphorClassifier:
 
         return results
 
-    def create_enhanced_visualizations(self, results: list[dict], output_dir: str):
+    def create_enhanced_visualizations(self, results: List[Dict], output_dir: str):
         """Create visualizations with metaphor analysis"""
         os.makedirs(output_dir, exist_ok=True)
 
@@ -513,7 +513,7 @@ class EnhancedMetaphorClassifier:
 
         print(f"Enhanced visualizations saved to {output_dir}")
 
-    def save_results(self, results: list[dict], output_dir: str, original_df: pd.DataFrame):
+    def save_results(self, results: List[Dict], output_dir: str, original_df: pd.DataFrame):
         """Save enhanced results"""
         os.makedirs(output_dir, exist_ok=True)
 
