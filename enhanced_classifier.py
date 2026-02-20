@@ -5,6 +5,7 @@ Integrates metaphor_analyzer for multi-level metaphor detection
 
 import os
 import json
+import re
 import pandas as pd
 import requests
 from datetime import datetime
@@ -250,9 +251,194 @@ class EnhancedMetaphorClassifier:
             ]
         }
 
+    # --- JSON Validation & Fallback ---
+
+    VALID_CLASSES = {'COMP', 'IIT', 'PRED', 'GWT', 'ENACT', 'PAN', 'EMERG', 'UND'}
+    VALID_CONFIDENCE = {'high', 'medium', 'low'}
+    VALID_METAPHOR_LEVELS = {'explicit_term', 'scientific_metaphor', 'meta_metaphor', 'nested_metaphor'}
+    VALID_METAPHOR_TYPES = {'ontological', 'structural', 'orientational', 'decorative'}
+
+    @staticmethod
+    def _extract_json_from_response(content: str) -> str:
+        """
+        Robustly extract JSON from LLM response, handling markdown fences,
+        preamble text, trailing garbage, etc.
+        """
+        # Strip markdown fences
+        content = re.sub(r'^```(?:json)?\s*', '', content.strip())
+        content = re.sub(r'\s*```\s*$', '', content.strip())
+
+        # Try to find JSON object boundaries
+        brace_start = content.find('{')
+        if brace_start == -1:
+            return content.strip()
+
+        # Walk forward to find balanced closing brace
+        depth = 0
+        in_string = False
+        escape_next = False
+        for i in range(brace_start, len(content)):
+            ch = content[i]
+            if escape_next:
+                escape_next = False
+                continue
+            if ch == '\\' and in_string:
+                escape_next = True
+                continue
+            if ch == '"' and not escape_next:
+                in_string = not in_string
+                continue
+            if in_string:
+                continue
+            if ch == '{':
+                depth += 1
+            elif ch == '}':
+                depth -= 1
+                if depth == 0:
+                    return content[brace_start:i + 1]
+
+        # Fallback: return from first brace to end
+        return content[brace_start:]
+
+    def _validate_classification(self, data: Dict) -> Dict:
+        """
+        Validate and normalise a classification dict.
+        Fills in missing fields with safe defaults so downstream code never crashes.
+        Returns the (possibly repaired) dict with a 'validation_warnings' list.
+        """
+        warnings_list: List[str] = []
+
+        # -- primary_class --
+        pc = data.get('primary_class', '')
+        if pc not in self.VALID_CLASSES:
+            warnings_list.append(f"Invalid primary_class '{pc}', falling back to UND")
+            data['primary_class'] = 'UND'
+
+        # -- confidence --
+        conf = data.get('confidence', '')
+        if conf not in self.VALID_CONFIDENCE:
+            warnings_list.append(f"Invalid confidence '{conf}', defaulting to 'low'")
+            data['confidence'] = 'low'
+
+        # -- scores --
+        scores = data.get('scores')
+        if not isinstance(scores, dict):
+            warnings_list.append("Missing or invalid 'scores', generating from pre-analysis")
+            data['scores'] = {cls: 0.0 for cls in self.VALID_CLASSES}
+            if data['primary_class'] != 'UND':
+                data['scores'][data['primary_class']] = 0.5
+        else:
+            for cls in self.VALID_CLASSES:
+                val = scores.get(cls)
+                if not isinstance(val, (int, float)) or not (0.0 <= val <= 1.0):
+                    scores[cls] = 0.0
+            data['scores'] = scores
+
+        # -- evidence --
+        evidence = data.get('evidence')
+        if not isinstance(evidence, list):
+            warnings_list.append("Missing or invalid 'evidence', set to empty list")
+            data['evidence'] = []
+        else:
+            clean_evidence = []
+            for item in evidence:
+                if not isinstance(item, dict):
+                    continue
+                # Normalise each evidence entry
+                item.setdefault('class', 'UND')
+                if item['class'] not in self.VALID_CLASSES:
+                    item['class'] = 'UND'
+                item.setdefault('metaphor_level', 'nested_metaphor')
+                if item['metaphor_level'] not in self.VALID_METAPHOR_LEVELS:
+                    item['metaphor_level'] = 'nested_metaphor'
+                item.setdefault('metaphor_type', 'decorative')
+                if item['metaphor_type'] not in self.VALID_METAPHOR_TYPES:
+                    item['metaphor_type'] = 'decorative'
+                item.setdefault('span', '')
+                item.setdefault('weight', 0.0)
+                if not isinstance(item['weight'], (int, float)):
+                    item['weight'] = 0.0
+                item.setdefault('reasoning', '')
+                clean_evidence.append(item)
+            data['evidence'] = clean_evidence
+
+        # -- secondary_class / is_hybrid --
+        sc = data.get('secondary_class', '')
+        if sc and sc not in self.VALID_CLASSES:
+            data['secondary_class'] = None
+            data['is_hybrid'] = False
+        data.setdefault('is_hybrid', False)
+
+        # -- metaphor_analysis --
+        ma = data.get('metaphor_analysis')
+        if not isinstance(ma, dict):
+            data['metaphor_analysis'] = {
+                'meta_metaphor_detected': False,
+                'dominant_semantic_field': 'unknown',
+                'artistic_transformation': '',
+                'theoretical_grounding': ''
+            }
+        else:
+            ma.setdefault('meta_metaphor_detected', False)
+            ma.setdefault('dominant_semantic_field', 'unknown')
+            ma.setdefault('artistic_transformation', '')
+            ma.setdefault('theoretical_grounding', '')
+
+        data.setdefault('notes', '')
+        data.setdefault('status', 'success')
+
+        if warnings_list:
+            data['validation_warnings'] = warnings_list
+
+        return data
+
+    def _build_fallback_from_pre_analysis(self, metaphor_hints: Dict,
+                                           description: str) -> Dict:
+        """
+        When the LLM response is completely unparseable, build a minimal
+        classification from the local pre-analysis so the pipeline never
+        stops.
+        """
+        dominant = metaphor_hints.get('dominant_theory') or 'UND'
+        if dominant not in self.VALID_CLASSES:
+            dominant = 'UND'
+
+        scores = {cls: 0.0 for cls in self.VALID_CLASSES}
+        if dominant != 'UND':
+            scores[dominant] = 0.4
+
+        evidence = []
+        for ep in metaphor_hints.get('evidence_preview', []):
+            evidence.append({
+                'class': ep.get('theory', 'UND'),
+                'metaphor_level': ep.get('level', 'nested_metaphor'),
+                'metaphor_type': ep.get('type', 'decorative'),
+                'span': ep.get('span', ''),
+                'weight': 0.3,
+                'reasoning': 'Fallback: built from local pre-analysis'
+            })
+
+        return {
+            'primary_class': dominant,
+            'confidence': 'low',
+            'scores': scores,
+            'evidence': evidence,
+            'is_hybrid': False,
+            'metaphor_analysis': {
+                'meta_metaphor_detected': metaphor_hints.get('meta_metaphor_present', False),
+                'dominant_semantic_field': 'unknown',
+                'artistic_transformation': '',
+                'theoretical_grounding': ''
+            },
+            'notes': 'Fallback classification from local pre-analysis (LLM response was unparseable)',
+            'status': 'fallback',
+            'metaphor_pre_analysis': metaphor_hints
+        }
+
     def classify_description(self, description: str, max_retries: int = 3) -> Dict:
         """
-        Classify with enhanced metaphor analysis
+        Classify with enhanced metaphor analysis.
+        Includes robust JSON extraction, validation and fallback.
         """
         # Pre-analyze metaphors
         metaphor_hints = self.pre_analyze_metaphors(description)
@@ -262,7 +448,10 @@ class EnhancedMetaphorClassifier:
 
         # Add metaphor hints to help LLM
         if metaphor_hints['meta_metaphor_present']:
-            user_prompt += f"\n\nПОДСКАЗКА: Обнаружены метафоры метафоры. Доминирующая теория: {metaphor_hints['dominant_theory']}"
+            user_prompt += (
+                f"\n\nПОДСКАЗКА: Обнаружены метафоры метафоры. "
+                f"Доминирующая теория: {metaphor_hints['dominant_theory']}"
+            )
 
         payload = {
             "model": self.model,
@@ -274,6 +463,7 @@ class EnhancedMetaphorClassifier:
             "temperature": 0.0
         }
 
+        last_error = None
         for attempt in range(max_retries):
             try:
                 response = requests.post(
@@ -287,41 +477,47 @@ class EnhancedMetaphorClassifier:
                     result = response.json()
                     content = result['choices'][0]['message']['content']
 
-                    # Clean JSON response
-                    if content.startswith("```json"):
-                        content = content.replace("```json", "").replace("```", "")
+                    # Robust JSON extraction
+                    cleaned = self._extract_json_from_response(content)
 
-                    classification = json.loads(content.strip())
+                    try:
+                        classification = json.loads(cleaned)
+                    except json.JSONDecodeError as je:
+                        print(f"  JSON parse error (attempt {attempt + 1}): {je}")
+                        print(f"  Raw response (first 300 chars): {content[:300]}")
+                        last_error = str(je)
+                        time.sleep(1)
+                        continue
 
-                    # Add pre-analysis metadata
+                    # Validate & repair
+                    classification = self._validate_classification(classification)
                     classification['metaphor_pre_analysis'] = metaphor_hints
-
                     return classification
 
                 elif response.status_code == 429:
                     wait_time = 2 ** attempt
-                    print(f"Rate limit hit, waiting {wait_time}s...")
+                    print(f"  Rate limit hit, waiting {wait_time}s...")
                     time.sleep(wait_time)
                     continue
 
                 else:
-                    print(f"API Error: {response.status_code} - {response.text}")
+                    last_error = f"HTTP {response.status_code}: {response.text[:200]}"
+                    print(f"  API Error: {last_error}")
 
+            except requests.exceptions.RequestException as e:
+                last_error = str(e)
+                print(f"  Network error (attempt {attempt + 1}): {e}")
+                time.sleep(2 ** attempt)
             except Exception as e:
-                print(f"Attempt {attempt + 1} failed: {e}")
-                if attempt == max_retries - 1:
-                    return {
-                        'primary_class': 'UND',
-                        'error': str(e),
-                        'status': 'error'
-                    }
+                last_error = str(e)
+                print(f"  Unexpected error (attempt {attempt + 1}): {e}")
                 time.sleep(2 ** attempt)
 
-        return {
-            'primary_class': 'UND',
-            'error': 'Max retries exceeded',
-            'status': 'error'
-        }
+        # All retries exhausted — use local fallback
+        print(f"  All retries exhausted. Using local fallback classification.")
+        fallback = self._build_fallback_from_pre_analysis(metaphor_hints, description)
+        fallback['error'] = last_error or 'Max retries exceeded'
+        return fallback
 
     def process_excel_file(self, file_path: str) -> pd.DataFrame:
         """Process Excel file"""
@@ -513,6 +709,389 @@ class EnhancedMetaphorClassifier:
 
         print(f"Enhanced visualizations saved to {output_dir}")
 
+    # ------------------------------------------------------------------ #
+    #  Consistency / Inter-rater Reliability Evaluation
+    # ------------------------------------------------------------------ #
+
+    def evaluate_consistency(
+        self,
+        descriptions: List[str],
+        titles: Optional[List[str]] = None,
+        num_rounds: int = 3,
+        temperature_variation: bool = True,
+    ) -> Dict:
+        """
+        Run multiple classification rounds on the same texts and compute
+        agreement metrics.
+
+        Args:
+            descriptions: Texts to classify.
+            titles: Optional human-readable titles.
+            num_rounds: How many independent classification passes to run.
+            temperature_variation: If True, use slightly different temperatures
+                per round (0.0, 0.3, 0.6 …) to probe model stability.
+                If False, use temperature=0.0 for all rounds.
+
+        Returns:
+            Dict with per-item and aggregate agreement statistics.
+        """
+        from collections import Counter
+
+        temperatures = [0.0]
+        if temperature_variation and num_rounds > 1:
+            step = 0.6 / (num_rounds - 1)
+            temperatures = [round(step * i, 2) for i in range(num_rounds)]
+
+        # Pad temperatures list if needed
+        while len(temperatures) < num_rounds:
+            temperatures.append(temperatures[-1])
+
+        all_rounds: List[List[Dict]] = []
+
+        for round_idx in range(num_rounds):
+            temp = temperatures[round_idx]
+            print(f"\n--- Consistency round {round_idx + 1}/{num_rounds} "
+                  f"(temperature={temp}) ---")
+
+            round_results = []
+            for idx, desc in enumerate(descriptions):
+                if pd.isna(desc) or not str(desc).strip():
+                    round_results.append({
+                        'primary_class': 'UND',
+                        'scores': {c: 0.0 for c in self.VALID_CLASSES},
+                        'status': 'skipped'
+                    })
+                    continue
+
+                title = titles[idx] if titles else f'Item_{idx}'
+                print(f"  [{round_idx+1}] Processing {idx+1}/{len(descriptions)}: {title}")
+
+                # Override temperature for this round
+                orig_temp = None  # we patch the payload inside classify_description
+                result = self._classify_with_temperature(str(desc), temp)
+                round_results.append(result)
+                time.sleep(0.5)
+
+            all_rounds.append(round_results)
+
+        # --- Compute agreement metrics ---
+        n_items = len(descriptions)
+        item_reports = []
+
+        total_full_agreement = 0
+        total_majority_agreement = 0
+
+        for idx in range(n_items):
+            classes_per_round = [
+                all_rounds[r][idx].get('primary_class', 'UND')
+                for r in range(num_rounds)
+            ]
+            counter = Counter(classes_per_round)
+            majority_class, majority_count = counter.most_common(1)[0]
+            agreement_ratio = majority_count / num_rounds
+
+            is_full_agreement = (majority_count == num_rounds)
+            if is_full_agreement:
+                total_full_agreement += 1
+            if majority_count > num_rounds / 2:
+                total_majority_agreement += 1
+
+            # Pairwise score correlation (average cosine-like similarity
+            # across score vectors)
+            score_vectors = []
+            for r in range(num_rounds):
+                scores = all_rounds[r][idx].get('scores', {})
+                vec = [scores.get(c, 0.0) for c in sorted(self.VALID_CLASSES)]
+                score_vectors.append(vec)
+
+            avg_pairwise_sim = self._avg_pairwise_similarity(score_vectors)
+
+            item_reports.append({
+                'index': idx,
+                'title': titles[idx] if titles else f'Item_{idx}',
+                'classes_per_round': classes_per_round,
+                'majority_class': majority_class,
+                'agreement_ratio': round(agreement_ratio, 3),
+                'full_agreement': is_full_agreement,
+                'score_similarity': round(avg_pairwise_sim, 3),
+            })
+
+        # Aggregate
+        n_valid = max(n_items, 1)
+        aggregate = {
+            'num_items': n_items,
+            'num_rounds': num_rounds,
+            'temperatures_used': temperatures[:num_rounds],
+            'full_agreement_rate': round(total_full_agreement / n_valid, 3),
+            'majority_agreement_rate': round(total_majority_agreement / n_valid, 3),
+            'avg_score_similarity': round(
+                sum(r['score_similarity'] for r in item_reports) / n_valid, 3
+            ),
+        }
+
+        # Fleiss' kappa (simplified for multiple raters, multiple categories)
+        fleiss_kappa = self._compute_fleiss_kappa(
+            [[all_rounds[r][idx].get('primary_class', 'UND')
+              for r in range(num_rounds)]
+             for idx in range(n_items)],
+            list(self.VALID_CLASSES)
+        )
+        aggregate['fleiss_kappa'] = round(fleiss_kappa, 4)
+
+        return {
+            'aggregate': aggregate,
+            'items': item_reports,
+            'raw_rounds': [
+                [{'primary_class': all_rounds[r][i].get('primary_class', 'UND'),
+                  'confidence': all_rounds[r][i].get('confidence', ''),
+                  'scores': all_rounds[r][i].get('scores', {})}
+                 for i in range(n_items)]
+                for r in range(num_rounds)
+            ]
+        }
+
+    def _classify_with_temperature(self, description: str, temperature: float) -> Dict:
+        """Classify a single description with a specific temperature."""
+        metaphor_hints = self.pre_analyze_metaphors(description)
+        user_prompt = USER_PROMPT_TEMPLATE.format(description=description)
+        if metaphor_hints['meta_metaphor_present']:
+            user_prompt += (
+                f"\n\nПОДСКАЗКА: Обнаружены метафоры метафоры. "
+                f"Доминирующая теория: {metaphor_hints['dominant_theory']}"
+            )
+
+        payload = {
+            "model": self.model,
+            "messages": [
+                {"role": "system", "content": ENHANCED_SYSTEM_PROMPT},
+                {"role": "user", "content": user_prompt}
+            ],
+            "max_tokens": 3000,
+            "temperature": temperature
+        }
+
+        for attempt in range(3):
+            try:
+                response = requests.post(
+                    self.base_url, headers=self.headers,
+                    json=payload, timeout=60
+                )
+                if response.status_code == 200:
+                    content = response.json()['choices'][0]['message']['content']
+                    cleaned = self._extract_json_from_response(content)
+                    try:
+                        classification = json.loads(cleaned)
+                    except json.JSONDecodeError:
+                        time.sleep(1)
+                        continue
+                    classification = self._validate_classification(classification)
+                    classification['metaphor_pre_analysis'] = metaphor_hints
+                    return classification
+                elif response.status_code == 429:
+                    time.sleep(2 ** attempt)
+                    continue
+            except Exception as e:
+                time.sleep(2 ** attempt)
+
+        fallback = self._build_fallback_from_pre_analysis(metaphor_hints, description)
+        return fallback
+
+    @staticmethod
+    def _avg_pairwise_similarity(vectors: List[List[float]]) -> float:
+        """Cosine similarity averaged over all pairs."""
+        import math
+        n = len(vectors)
+        if n < 2:
+            return 1.0
+
+        def cosine(a, b):
+            dot = sum(x * y for x, y in zip(a, b))
+            na = math.sqrt(sum(x * x for x in a))
+            nb = math.sqrt(sum(x * x for x in b))
+            if na < 1e-9 or nb < 1e-9:
+                return 0.0
+            return dot / (na * nb)
+
+        total = 0.0
+        count = 0
+        for i in range(n):
+            for j in range(i + 1, n):
+                total += cosine(vectors[i], vectors[j])
+                count += 1
+        return total / count if count else 0.0
+
+    @staticmethod
+    def _compute_fleiss_kappa(
+        ratings: List[List[str]],
+        categories: List[str]
+    ) -> float:
+        """
+        Compute Fleiss' kappa for inter-rater reliability.
+        ratings: list of items, each item is a list of category labels
+                 (one per rater/round).
+        categories: list of all possible category labels.
+        """
+        n = len(ratings)       # number of items
+        if n == 0:
+            return 0.0
+        k = len(ratings[0])   # number of raters
+        if k < 2:
+            return 0.0
+
+        cat_index = {c: i for i, c in enumerate(categories)}
+        num_cats = len(categories)
+
+        # Build rating matrix: n_ij = number of raters who assigned
+        # category j to item i
+        matrix = []
+        for item_ratings in ratings:
+            row = [0] * num_cats
+            for label in item_ratings:
+                idx = cat_index.get(label)
+                if idx is not None:
+                    row[idx] += 1
+            matrix.append(row)
+
+        # P_i for each item
+        P_items = []
+        for row in matrix:
+            s = sum(r * (r - 1) for r in row)
+            P_items.append(s / (k * (k - 1)) if k > 1 else 0.0)
+
+        P_bar = sum(P_items) / n
+
+        # p_j: proportion of all assignments to category j
+        p_j = []
+        total_assignments = n * k
+        for j in range(num_cats):
+            col_sum = sum(matrix[i][j] for i in range(n))
+            p_j.append(col_sum / total_assignments if total_assignments else 0.0)
+
+        P_e = sum(p * p for p in p_j)
+
+        if abs(1.0 - P_e) < 1e-9:
+            return 1.0 if P_bar >= 1.0 - 1e-9 else 0.0
+
+        kappa = (P_bar - P_e) / (1.0 - P_e)
+        return kappa
+
+    def save_consistency_report(self, report: Dict, output_dir: str):
+        """Save consistency evaluation results."""
+        os.makedirs(output_dir, exist_ok=True)
+
+        # JSON
+        with open(os.path.join(output_dir, 'consistency_report.json'),
+                  'w', encoding='utf-8') as f:
+            json.dump(report, f, ensure_ascii=False, indent=2)
+
+        # Human-readable summary
+        agg = report['aggregate']
+        with open(os.path.join(output_dir, 'consistency_summary.txt'),
+                  'w', encoding='utf-8') as f:
+            f.write("INTER-RATER CONSISTENCY EVALUATION\n")
+            f.write("=" * 60 + "\n\n")
+            f.write(f"Items evaluated:        {agg['num_items']}\n")
+            f.write(f"Classification rounds:  {agg['num_rounds']}\n")
+            f.write(f"Temperatures used:      {agg['temperatures_used']}\n\n")
+
+            f.write("AGGREGATE METRICS:\n")
+            f.write("-" * 40 + "\n")
+            f.write(f"Fleiss' kappa:          {agg['fleiss_kappa']:.4f}\n")
+            f.write(f"Full agreement rate:    {agg['full_agreement_rate']:.1%}\n")
+            f.write(f"Majority agreement:     {agg['majority_agreement_rate']:.1%}\n")
+            f.write(f"Avg score similarity:   {agg['avg_score_similarity']:.3f}\n\n")
+
+            # Interpretation
+            kappa = agg['fleiss_kappa']
+            if kappa >= 0.8:
+                interp = "Almost perfect agreement"
+            elif kappa >= 0.6:
+                interp = "Substantial agreement"
+            elif kappa >= 0.4:
+                interp = "Moderate agreement"
+            elif kappa >= 0.2:
+                interp = "Fair agreement"
+            else:
+                interp = "Slight/poor agreement"
+            f.write(f"Interpretation:         {interp}\n\n")
+
+            # Per-item details
+            f.write("PER-ITEM DETAILS:\n")
+            f.write("-" * 60 + "\n")
+            for item in report['items']:
+                f.write(f"\n[{item['index']}] {item['title']}\n")
+                f.write(f"  Rounds:     {' / '.join(item['classes_per_round'])}\n")
+                f.write(f"  Majority:   {item['majority_class']} "
+                        f"(agreement: {item['agreement_ratio']:.0%})\n")
+                f.write(f"  Score sim:  {item['score_similarity']:.3f}\n")
+                if not item['full_agreement']:
+                    f.write(f"  ** DISAGREEMENT DETECTED **\n")
+
+        # Visualization
+        self._visualize_consistency(report, output_dir)
+        print(f"Consistency report saved to {output_dir}")
+
+    def _visualize_consistency(self, report: Dict, output_dir: str):
+        """Create consistency evaluation charts."""
+        items = report['items']
+        if not items:
+            return
+
+        fig, axes = plt.subplots(2, 2, figsize=(14, 10))
+
+        # 1. Agreement ratio distribution
+        ax1 = axes[0, 0]
+        ratios = [it['agreement_ratio'] for it in items]
+        ax1.hist(ratios, bins=10, color='steelblue', edgecolor='black', range=(0, 1))
+        ax1.set_title('Agreement Ratio Distribution', fontweight='bold')
+        ax1.set_xlabel('Agreement ratio')
+        ax1.set_ylabel('Count')
+        ax1.axvline(x=sum(ratios)/len(ratios), color='red', linestyle='--',
+                     label=f'Mean = {sum(ratios)/len(ratios):.2f}')
+        ax1.legend()
+
+        # 2. Score similarity distribution
+        ax2 = axes[0, 1]
+        sims = [it['score_similarity'] for it in items]
+        ax2.hist(sims, bins=10, color='mediumpurple', edgecolor='black', range=(0, 1))
+        ax2.set_title('Score Similarity Distribution', fontweight='bold')
+        ax2.set_xlabel('Cosine similarity')
+        ax2.set_ylabel('Count')
+        ax2.axvline(x=sum(sims)/len(sims), color='red', linestyle='--',
+                     label=f'Mean = {sum(sims)/len(sims):.2f}')
+        ax2.legend()
+
+        # 3. Full vs partial agreement pie
+        ax3 = axes[1, 0]
+        full = sum(1 for it in items if it['full_agreement'])
+        partial = len(items) - full
+        ax3.pie([full, partial],
+                labels=['Full agreement', 'Disagreement'],
+                autopct='%1.1f%%', colors=['#66bb6a', '#ef5350'])
+        ax3.set_title('Classification Stability', fontweight='bold')
+
+        # 4. Disagreement by majority class
+        ax4 = axes[1, 1]
+        from collections import Counter
+        disagree_classes = Counter(
+            it['majority_class'] for it in items if not it['full_agreement']
+        )
+        if disagree_classes:
+            classes = list(disagree_classes.keys())
+            counts = [disagree_classes[c] for c in classes]
+            ax4.barh(classes, counts, color='salmon', edgecolor='black')
+            ax4.set_title('Disagreements by Theory', fontweight='bold')
+            ax4.set_xlabel('Count')
+        else:
+            ax4.text(0.5, 0.5, 'No disagreements!',
+                     ha='center', va='center', fontsize=14)
+            ax4.set_title('Disagreements by Theory', fontweight='bold')
+
+        plt.tight_layout()
+        plt.savefig(os.path.join(output_dir, 'consistency_analysis.png'),
+                    dpi=300, bbox_inches='tight')
+        plt.close()
+
     def save_results(self, results: List[Dict], output_dir: str, original_df: pd.DataFrame):
         """Save enhanced results"""
         os.makedirs(output_dir, exist_ok=True)
@@ -603,7 +1182,33 @@ class EnhancedMetaphorClassifier:
 
 
 def main():
-    """Main execution"""
+    """Main execution.
+
+    Usage:
+        python enhanced_classifier.py                  # standard analysis
+        python enhanced_classifier.py --consistency    # inter-rater evaluation
+        python enhanced_classifier.py --consistency --rounds 5
+        python enhanced_classifier.py --consistency --sample 10
+    """
+    import argparse
+
+    parser = argparse.ArgumentParser(
+        description='Enhanced Consciousness Theory Classifier'
+    )
+    parser.add_argument(
+        '--consistency', action='store_true',
+        help='Run inter-rater consistency evaluation instead of single-pass classification'
+    )
+    parser.add_argument(
+        '--rounds', type=int, default=3,
+        help='Number of classification rounds for consistency evaluation (default: 3)'
+    )
+    parser.add_argument(
+        '--sample', type=int, default=0,
+        help='Evaluate only first N items (0 = all). Useful for quick tests.'
+    )
+    args = parser.parse_args()
+
     try:
         print("=" * 70)
         print("ENHANCED CONSCIOUSNESS THEORY CLASSIFIER")
@@ -619,30 +1224,56 @@ def main():
         descriptions = df['combined_description'].tolist()
         titles = df.get('title', [f'Item_{i}' for i in range(len(descriptions))]).tolist()
 
-        print(f"Found {len(descriptions)} items to classify")
+        if args.sample > 0:
+            descriptions = descriptions[:args.sample]
+            titles = titles[:args.sample]
+
+        print(f"Found {len(descriptions)} items to process")
         print()
 
-        print("Starting classification with enhanced metaphor analysis...")
-        results = classifier.classify_batch(descriptions, titles)
-
         timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-        output_dir = f'enhanced_analysis_results_{timestamp}'
 
-        print("\nSaving results...")
-        classifier.save_results(results, output_dir, df)
+        if args.consistency:
+            # --- Consistency evaluation mode ---
+            print(f"Running consistency evaluation ({args.rounds} rounds)...")
+            report = classifier.evaluate_consistency(
+                descriptions, titles, num_rounds=args.rounds
+            )
+            output_dir = f'consistency_results_{timestamp}'
+            classifier.save_consistency_report(report, output_dir)
 
-        print("Creating enhanced visualizations...")
-        classifier.create_enhanced_visualizations(results, output_dir)
+            agg = report['aggregate']
+            print("\n" + "=" * 70)
+            print("CONSISTENCY EVALUATION COMPLETE")
+            print(f"  Fleiss' kappa:        {agg['fleiss_kappa']:.4f}")
+            print(f"  Full agreement rate:  {agg['full_agreement_rate']:.1%}")
+            print(f"  Majority agreement:   {agg['majority_agreement_rate']:.1%}")
+            print(f"  Avg score similarity: {agg['avg_score_similarity']:.3f}")
+            print(f"\nResults saved to: {output_dir}")
+            print("=" * 70)
 
-        print("\n" + "=" * 70)
-        print(f"✅ Analysis complete! Results saved to: {output_dir}")
-        print("\nFiles created:")
-        print(f"  📊 {output_dir}/enhanced_analysis_summary.txt")
-        print(f"  📋 {output_dir}/enhanced_classification_results.json")
-        print(f"  📈 {output_dir}/enhanced_classified_data.csv")
-        print(f"  📊 {output_dir}/enhanced_classified_data.xlsx")
-        print(f"  🎨 {output_dir}/enhanced_analysis.png")
-        print("=" * 70)
+        else:
+            # --- Standard classification mode ---
+            print("Starting classification with enhanced metaphor analysis...")
+            results = classifier.classify_batch(descriptions, titles)
+
+            output_dir = f'enhanced_analysis_results_{timestamp}'
+
+            print("\nSaving results...")
+            classifier.save_results(results, output_dir, df)
+
+            print("Creating enhanced visualizations...")
+            classifier.create_enhanced_visualizations(results, output_dir)
+
+            print("\n" + "=" * 70)
+            print(f"Analysis complete! Results saved to: {output_dir}")
+            print("\nFiles created:")
+            print(f"  {output_dir}/enhanced_analysis_summary.txt")
+            print(f"  {output_dir}/enhanced_classification_results.json")
+            print(f"  {output_dir}/enhanced_classified_data.csv")
+            print(f"  {output_dir}/enhanced_classified_data.xlsx")
+            print(f"  {output_dir}/enhanced_analysis.png")
+            print("=" * 70)
 
     except Exception as e:
         print(f"Error: {e}")

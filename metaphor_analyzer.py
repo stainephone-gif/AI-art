@@ -3,8 +3,9 @@ Enhanced Metaphor Analysis Module for Consciousness Theory Classification
 Focuses on multi-level metaphor analysis (metaphor of metaphor)
 """
 
+import re
 import json
-from typing import Dict, List, Tuple, Set
+from typing import Dict, List, Tuple, Set, Optional
 from dataclasses import dataclass, field
 from enum import Enum
 
@@ -189,89 +190,303 @@ class MetaphorOntology:
 
 class MetaphorAnalyzer:
     """
-    Advanced metaphor analyzer with multi-level detection
+    Advanced metaphor analyzer with multi-level detection.
+    Uses context-window matching instead of naive substring search.
     """
+
+    # Maximum distance (in tokens) between keywords of a multi-word
+    # phrase for them to count as co-occurring in the same context window.
+    CONTEXT_WINDOW_SIZE = 15  # words
 
     def __init__(self):
         self.ontology = MetaphorOntology.get_all_domains()
+        # Pre-compile a tokeniser that keeps Cyrillic, Latin and digits
+        self._token_re = re.compile(r'[а-яёa-z0-9]+', re.IGNORECASE)
+
+    # ------------------------------------------------------------------ #
+    #  Tokenisation & context-window helpers
+    # ------------------------------------------------------------------ #
+
+    def _tokenize(self, text: str) -> List[str]:
+        """Split text into lowercase tokens."""
+        return [t.lower() for t in self._token_re.findall(text)]
+
+    # Minimum shared prefix length for stem matching
+    _MIN_STEM_LEN = 4
+
+    def _build_token_positions(self, tokens: List[str]) -> Dict[str, List[int]]:
+        """Map each unique token to a sorted list of its positions."""
+        positions: Dict[str, List[int]] = {}
+        for idx, tok in enumerate(tokens):
+            positions.setdefault(tok, []).append(idx)
+        return positions
+
+    @staticmethod
+    def _stem_match(keyword: str, token: str) -> bool:
+        """
+        Check if keyword and token share a common stem.
+        Handles Russian morphology (inflections, conjugations) by comparing
+        prefixes.  E.g. 'синтез' matches 'синтезируя', 'восприятия' matches
+        'восприятие'.
+        """
+        min_len = MetaphorAnalyzer._MIN_STEM_LEN
+        if len(keyword) < min_len or len(token) < min_len:
+            return keyword == token
+        # Check if one is a prefix of the other, or they share a long prefix
+        shared = min(len(keyword), len(token))
+        prefix_len = 0
+        for a, b in zip(keyword, token):
+            if a == b:
+                prefix_len += 1
+            else:
+                break
+        # Require the shared prefix to be at least min_len chars
+        # AND at least 60% of the shorter word (handles short stems well)
+        shorter = min(len(keyword), len(token))
+        return prefix_len >= min_len and prefix_len >= shorter * 0.6
+
+    def _find_stem_positions(self, keyword_token: str,
+                             tokens: List[str],
+                             token_positions: Dict[str, List[int]]) -> List[int]:
+        """Find all positions where a token stem-matches the keyword."""
+        positions = []
+        # Fast path: exact match
+        if keyword_token in token_positions:
+            positions.extend(token_positions[keyword_token])
+
+        # Stem matching for tokens not already matched
+        exact_set = set(token_positions.get(keyword_token, []))
+        for tok, tok_positions in token_positions.items():
+            if tok == keyword_token:
+                continue
+            if self._stem_match(keyword_token, tok):
+                for p in tok_positions:
+                    if p not in exact_set:
+                        positions.append(p)
+        positions.sort()
+        return positions
+
+    def _phrase_in_context_window(
+        self,
+        phrase_tokens: List[str],
+        token_positions: Dict[str, List[int]],
+        total_tokens: int,
+        window: Optional[int] = None,
+        all_tokens: Optional[List[str]] = None,
+    ) -> Tuple[bool, float, str]:
+        """
+        Check whether *all* tokens of a phrase appear within a sliding
+        context window of ``window`` tokens.  Uses stem matching to
+        handle morphological variation.
+
+        Returns:
+            (matched: bool,
+             proximity_score: 0.0-1.0 — tighter cluster → higher score,
+             matched_span: text slice that was matched)
+        """
+        if window is None:
+            window = self.CONTEXT_WINDOW_SIZE
+        if all_tokens is None:
+            all_tokens = []
+
+        # Every phrase token must exist in the text (via stem matching)
+        positions_per_kw = []
+        for kw in phrase_tokens:
+            kw_positions = self._find_stem_positions(kw, all_tokens, token_positions)
+            if not kw_positions:
+                return (False, 0.0, "")
+            positions_per_kw.append(kw_positions)
+
+        if len(positions_per_kw) == 1:
+            # Single-token phrase — always matches
+            return (True, 1.0, phrase_tokens[0])
+
+        # Sliding-pointer approach: for every position of the first keyword,
+        # check whether the remaining keywords have a position within `window`.
+        best_span_width = total_tokens  # worst case
+        matched = False
+        best_min_pos = 0
+        best_max_pos = 0
+        for anchor_pos in positions_per_kw[0]:
+            lo = anchor_pos
+            hi = anchor_pos
+            all_found = True
+            for other_positions in positions_per_kw[1:]:
+                # Binary-ish: find closest position within [anchor-window, anchor+window]
+                found_in_window = False
+                for p in other_positions:
+                    if abs(p - anchor_pos) <= window:
+                        lo = min(lo, p)
+                        hi = max(hi, p)
+                        found_in_window = True
+                        break
+                if not found_in_window:
+                    all_found = False
+                    break
+            if all_found:
+                span_width = hi - lo
+                if span_width < best_span_width:
+                    best_span_width = span_width
+                    best_min_pos = lo
+                    best_max_pos = hi
+                    matched = True
+
+        if not matched:
+            return (False, 0.0, "")
+
+        # Proximity score: tighter cluster → higher score
+        max_possible_span = window
+        proximity = max(0.0, 1.0 - best_span_width / max_possible_span)
+        return (True, proximity, " ".join(phrase_tokens))
+
+    def _keyword_in_context(
+        self,
+        keyword: str,
+        tokens: List[str],
+        token_positions: Dict[str, List[int]],
+    ) -> Tuple[bool, List[int]]:
+        """
+        Check if a keyword (single or multi-word) appears in the token stream.
+        Uses stem matching to handle morphological variation (e.g.
+        'восприятия' matches 'восприятие', 'синтез' matches 'синтезируя').
+        Returns (found, positions_of_first_token).
+        """
+        kw_tokens = self._tokenize(keyword)
+        if not kw_tokens:
+            return (False, [])
+
+        if len(kw_tokens) == 1:
+            positions = self._find_stem_positions(kw_tokens[0], tokens, token_positions)
+            return (bool(positions), positions)
+
+        # Multi-word keyword: look for consecutive tokens (stem-matched)
+        first_positions = self._find_stem_positions(kw_tokens[0], tokens, token_positions)
+        match_positions = []
+        for pos in first_positions:
+            if pos + len(kw_tokens) - 1 >= len(tokens):
+                continue
+            if all(
+                self._stem_match(kw_tokens[i], tokens[pos + i])
+                for i in range(len(kw_tokens))
+            ):
+                match_positions.append(pos)
+
+        return (bool(match_positions), match_positions)
+
+    # ------------------------------------------------------------------ #
+    #  Core detection methods (context-window based)
+    # ------------------------------------------------------------------ #
 
     def detect_metaphor_level(self, text: str, keywords: List[str],
                              scientific_metaphors: List[str],
                              artistic_transformations: List[str]) -> Tuple[MetaphorLevel, str]:
         """
-        Detect the level of metaphorical expression
-
-        Returns:
-            (MetaphorLevel, matching_text)
+        Detect the level of metaphorical expression using context-window
+        matching instead of naive substring search.
         """
-        text_lower = text.lower()
+        tokens = self._tokenize(text)
+        token_positions = self._build_token_positions(tokens)
+        total = len(tokens)
 
-        # Check for explicit terms
+        # 1. Check for explicit terms (exact word-boundary match)
         for keyword in keywords:
-            if keyword.lower() in text_lower:
+            found, _ = self._keyword_in_context(keyword, tokens, token_positions)
+            if found:
                 return (MetaphorLevel.EXPLICIT_TERM, keyword)
 
-        # Check for scientific metaphors
+        # 2. Check for scientific metaphors (context-window co-occurrence)
+        best_sci = None
+        best_sci_score = 0.0
         for metaphor in scientific_metaphors:
-            metaphor_keywords = metaphor.lower().split()
-            if sum(kw in text_lower for kw in metaphor_keywords) >= len(metaphor_keywords) // 2:
-                return (MetaphorLevel.SCIENTIFIC_METAPHOR, metaphor)
+            phrase_tokens = self._tokenize(metaphor)
+            if len(phrase_tokens) < 2:
+                continue
+            matched, proximity, span = self._phrase_in_context_window(
+                phrase_tokens, token_positions, total, all_tokens=tokens
+            )
+            if matched and proximity > best_sci_score:
+                best_sci_score = proximity
+                best_sci = metaphor
 
-        # Check for artistic transformations (meta-metaphors)
+        # 3. Check for artistic transformations (context-window co-occurrence)
+        best_art = None
+        best_art_score = 0.0
         for transformation in artistic_transformations:
-            trans_keywords = transformation.lower().split()
-            if sum(kw in text_lower for kw in trans_keywords) >= len(trans_keywords) // 2:
-                return (MetaphorLevel.META_METAPHOR, transformation)
+            phrase_tokens = self._tokenize(transformation)
+            if len(phrase_tokens) < 2:
+                continue
+            matched, proximity, span = self._phrase_in_context_window(
+                phrase_tokens, token_positions, total, all_tokens=tokens
+            )
+            if matched and proximity > best_art_score:
+                best_art_score = proximity
+                best_art = transformation
+
+        # Prefer the level with the highest proximity score
+        if best_sci and best_sci_score >= best_art_score:
+            return (MetaphorLevel.SCIENTIFIC_METAPHOR, best_sci)
+        if best_art:
+            return (MetaphorLevel.META_METAPHOR, best_art)
 
         return (MetaphorLevel.NESTED_METAPHOR, "")
 
     def identify_semantic_field(self, text: str) -> List[Tuple[str, float, str]]:
         """
-        Identify semantic fields present in text
-
-        Returns:
-            List of (theory, score, dominant_semantic_field)
+        Identify semantic fields present in text using context-window
+        co-occurrence instead of naive substring matching.
         """
+        tokens = self._tokenize(text)
+        token_positions = self._build_token_positions(tokens)
+        total = len(tokens)
         results = []
-        text_lower = text.lower()
 
         for theory, domain in self.ontology.items():
-            score = 0
+            score = 0.0
             matched_keywords = []
 
-            # Match keywords
+            # Match keywords (word-boundary)
             for keyword in domain['keywords']:
-                if keyword.lower() in text_lower:
+                found, _ = self._keyword_in_context(keyword, tokens, token_positions)
+                if found:
                     score += 0.15
                     matched_keywords.append(keyword)
 
-            # Match scientific metaphors (higher weight)
+            # Match scientific metaphors (context-window)
             for metaphor in domain['scientific_metaphors']:
-                metaphor_keywords = metaphor.lower().split()
-                match_count = sum(kw in text_lower for kw in metaphor_keywords)
-                if match_count >= 2:
-                    score += 0.3 * (match_count / len(metaphor_keywords))
+                phrase_tokens = self._tokenize(metaphor)
+                if len(phrase_tokens) < 2:
+                    continue
+                matched, proximity, _ = self._phrase_in_context_window(
+                    phrase_tokens, token_positions, total, all_tokens=tokens
+                )
+                if matched:
+                    score += 0.3 * proximity
                     matched_keywords.append(metaphor)
 
-            # Match artistic transformations (meta-metaphor detection)
+            # Match artistic transformations (context-window, higher weight)
             for transformation in domain['artistic_transformations']:
-                trans_keywords = transformation.lower().split()
-                match_count = sum(kw in text_lower for kw in trans_keywords)
-                if match_count >= 2:
-                    score += 0.5 * (match_count / len(trans_keywords))  # Higher weight for meta-metaphors
+                phrase_tokens = self._tokenize(transformation)
+                if len(phrase_tokens) < 2:
+                    continue
+                matched, proximity, _ = self._phrase_in_context_window(
+                    phrase_tokens, token_positions, total, all_tokens=tokens
+                )
+                if matched:
+                    score += 0.5 * proximity
                     matched_keywords.append(transformation)
 
             if score > 0:
                 semantic_field = ", ".join(matched_keywords[:3])
                 results.append((theory, min(score, 1.0), semantic_field))
 
-        # Sort by score
         results.sort(key=lambda x: x[1], reverse=True)
         return results
 
     def determine_metaphor_type(self, text: str, span: str) -> MetaphorType:
         """
-        Determine if metaphor is ontological (about nature of mind) or decorative
+        Determine if metaphor is ontological (about nature of mind) or decorative.
+        Uses stem matching to handle Russian inflections (e.g. 'сознания' matches
+        'сознание').
         """
         # Ontological indicators
         ontological_markers = [
@@ -295,19 +510,27 @@ class MetaphorAnalyzer:
             'центр', 'периферия', 'пространство', 'время'
         ]
 
-        text_lower = text.lower()
-        span_lower = span.lower()
+        text_tokens = self._tokenize(text)
+        span_tokens = self._tokenize(span)
 
-        # Check ontological
-        if any(marker in text_lower for marker in ontological_markers):
+        def _has_marker(tokens: List[str], markers: List[str]) -> bool:
+            for marker in markers:
+                marker_lower = marker.lower()
+                for tok in tokens:
+                    if self._stem_match(marker_lower, tok):
+                        return True
+            return False
+
+        # Check ontological (against full text)
+        if _has_marker(text_tokens, ontological_markers):
             return MetaphorType.ONTOLOGICAL
 
-        # Check structural
-        if any(marker in span_lower for marker in structural_markers):
+        # Check structural (against span)
+        if _has_marker(span_tokens, structural_markers):
             return MetaphorType.STRUCTURAL
 
-        # Check orientational
-        if any(marker in span_lower for marker in orientational_markers):
+        # Check orientational (against span)
+        if _has_marker(span_tokens, orientational_markers):
             return MetaphorType.ORIENTATIONAL
 
         return MetaphorType.DECORATIVE
