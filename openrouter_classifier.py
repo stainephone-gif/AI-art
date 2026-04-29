@@ -130,7 +130,9 @@ class OpenRouterClassifier:
         
         if not self.api_key:
             raise ValueError("OPENROUTER_API_KEY not found in .env file")
-        
+
+        self.request_delay = float(os.getenv('RATE_LIMIT_DELAY', '2.0'))
+
         self.headers = {
             "Authorization": f"Bearer {self.api_key}",
             "Content-Type": "application/json",
@@ -181,8 +183,7 @@ class OpenRouterClassifier:
                     return json.loads(content.strip())
                 
                 elif response.status_code == 429:
-                    # Rate limit - wait and retry
-                    wait_time = 2 ** attempt
+                    wait_time = 10 * (2 ** attempt)
                     print(f"Rate limit hit, waiting {wait_time}s...")
                     time.sleep(wait_time)
                     continue
@@ -269,9 +270,8 @@ class OpenRouterClassifier:
             result['description_length'] = len(str(desc))
             
             results.append(result)
-            
-            # Small delay to avoid rate limits
-            time.sleep(0.5)
+
+            time.sleep(self.request_delay)
         
         return results
     
