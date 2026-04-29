@@ -123,7 +123,9 @@ class OpenRouterClassifier:
     def __init__(self):
         """Initialize with OpenRouter API configuration from .env"""
         self.api_key = os.getenv('OPENROUTER_API_KEY')
-        self.base_url = "https://openrouter.ai/api/v1/chat/completions"
+        self.base_url = os.getenv(
+            'API_BASE_URL', 'https://openrouter.ai/api/v1/chat/completions'
+        )
         self.model = os.getenv('OPENROUTER_MODEL', 'anthropic/claude-3.5-sonnet')
         
         if not self.api_key:
