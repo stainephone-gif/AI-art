@@ -219,6 +219,8 @@ class EnhancedMetaphorClassifier:
         if not self.api_key:
             raise ValueError("OPENROUTER_API_KEY not found in .env file")
 
+        self.request_delay = float(os.getenv('RATE_LIMIT_DELAY', '2.0'))
+
         self.headers = {
             "Authorization": f"Bearer {self.api_key}",
             "Content-Type": "application/json",
@@ -497,7 +499,7 @@ class EnhancedMetaphorClassifier:
                     return classification
 
                 elif response.status_code == 429:
-                    wait_time = 2 ** attempt
+                    wait_time = 10 * (2 ** attempt)
                     print(f"  Rate limit hit, waiting {wait_time}s...")
                     time.sleep(wait_time)
                     continue
@@ -565,7 +567,7 @@ class EnhancedMetaphorClassifier:
 
             results.append(result)
 
-            time.sleep(0.5)
+            time.sleep(self.request_delay)
 
         return results
 
@@ -890,10 +892,10 @@ class EnhancedMetaphorClassifier:
                     classification['metaphor_pre_analysis'] = metaphor_hints
                     return classification
                 elif response.status_code == 429:
-                    time.sleep(2 ** attempt)
+                    time.sleep(10 * (2 ** attempt))
                     continue
             except Exception as e:
-                time.sleep(2 ** attempt)
+                time.sleep(10 * (2 ** attempt))
 
         fallback = self._build_fallback_from_pre_analysis(metaphor_hints, description)
         return fallback
