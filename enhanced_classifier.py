@@ -165,6 +165,13 @@ EMERG - Emergentism:
   "is_hybrid": true,
   "metaphor_analysis": {
     "meta_metaphor_detected": true,
+    "meta_metaphor": {
+      "present": true,
+      "source_phrase": "генеративная модель создаёт образы",
+      "transformation_phrase": "подобно воображению",
+      "theory": "PRED",
+      "confidence": "high"
+    },
     "dominant_semantic_field": "predictive_generative",
     "artistic_transformation": "scientific concept → artistic practice",
     "theoretical_grounding": "PRED + COMP hybrid"
@@ -179,6 +186,12 @@ EMERG - Emergentism:
 - Метафоры учитываются только если ONTOLOGICAL или STRUCTURAL
 - При обнаружении meta_metaphor укажите в reasoning трансформацию: "X (научное) → Y (художественное)"
 - Декоративные метафоры (metaphor_type: decorative) получают низкий вес ×0.3
+- Поле meta_metaphor ОБЯЗАТЕЛЬНО заполнить если meta_metaphor_detected=true:
+    source_phrase — цитата из текста с исходной научной концепцией
+    transformation_phrase — цитата из текста с художественным переосмыслением
+    theory — теория, к которой относится (COMP/IIT/PRED/GWT/ENACT/PAN/EMERG)
+    confidence — уверенность в детекции (high/medium/low)
+- Если meta_metaphor_detected=false → meta_metaphor.present=false, остальные поля пустые строки
 """
 
 
@@ -233,8 +246,15 @@ class EnhancedMetaphorClassifier:
 
     def pre_analyze_metaphors(self, description: str) -> Dict:
         """
-        Pre-analyze metaphors before LLM classification
-        Provides structured hints to the LLM
+        Pre-analyze metaphors before LLM classification.
+        Provides keyword-based hints to the LLM.
+
+        DEPRECATED (meta_metaphor_present field only):
+            The `meta_metaphor_present` field in the returned dict is always False
+            because MetaphorAnalyzer.analyze_metaphor_network() cannot detect
+            meta-metaphors via keyword co-occurrence in real curatorial texts.
+            Retained as a scaffold; all other fields (detected_metaphors, semantic_fields,
+            evidence_preview) remain valid and are used as pre-classification hints.
         """
         evidence = self.metaphor_analyzer.extract_metaphors(description)
         network = self.metaphor_analyzer.analyze_metaphor_network(evidence)
@@ -378,6 +398,10 @@ class EnhancedMetaphorClassifier:
         if not isinstance(ma, dict):
             data['metaphor_analysis'] = {
                 'meta_metaphor_detected': False,
+                'meta_metaphor': {
+                    'present': False, 'source_phrase': '',
+                    'transformation_phrase': '', 'theory': '', 'confidence': ''
+                },
                 'dominant_semantic_field': 'unknown',
                 'artistic_transformation': '',
                 'theoretical_grounding': ''
@@ -387,6 +411,22 @@ class EnhancedMetaphorClassifier:
             ma.setdefault('dominant_semantic_field', 'unknown')
             ma.setdefault('artistic_transformation', '')
             ma.setdefault('theoretical_grounding', '')
+            # Validate nested meta_metaphor object
+            mm = ma.get('meta_metaphor')
+            if not isinstance(mm, dict):
+                ma['meta_metaphor'] = {
+                    'present': ma.get('meta_metaphor_detected', False),
+                    'source_phrase': '', 'transformation_phrase': '',
+                    'theory': '', 'confidence': ''
+                }
+            else:
+                mm.setdefault('present', ma.get('meta_metaphor_detected', False))
+                mm.setdefault('source_phrase', '')
+                mm.setdefault('transformation_phrase', '')
+                if mm.get('theory', '') not in (self.VALID_CLASSES | {''}):
+                    mm['theory'] = ''
+                if mm.get('confidence', '') not in ('high', 'medium', 'low', ''):
+                    mm['confidence'] = ''
 
         data.setdefault('notes', '')
         data.setdefault('status', 'success')
@@ -1184,15 +1224,57 @@ class EnhancedMetaphorClassifier:
 
         print(f"Enhanced results saved to {output_dir}")
 
+    def rerun_classification(
+        self,
+        existing_json_path: str,
+        excel_path: str = 'combined_ai_preprocessed.xlsx'
+    ) -> List[Dict]:
+        """
+        Re-classify only high+medium confidence records from a previous run.
+        Merges new results (with structured meta_metaphor) back with untouched low/error records.
+        """
+        with open(existing_json_path, encoding='utf-8') as f:
+            existing: List[Dict] = json.load(f)
+
+        df = self.process_excel_file(excel_path)
+        descriptions = df['combined_description'].tolist()
+        titles = df.get('title', [f'Item_{i}' for i in range(len(descriptions))]).tolist()
+
+        rerun_indices = {
+            r['index'] for r in existing
+            if r.get('confidence') in ('high', 'medium')
+            and r.get('status') not in ('error', 'skipped')
+        }
+
+        print(f"Re-classifying {len(rerun_indices)} high+medium confidence records "
+              f"({len(existing) - len(rerun_indices)} low/error kept as-is)...")
+
+        results_by_index: Dict[int, Dict] = {r['index']: r for r in existing}
+
+        for idx in sorted(rerun_indices):
+            desc = descriptions[idx]
+            title = titles[idx]
+            print(f"  Re-running {idx + 1}/{len(descriptions)}: {title}")
+            result = self.classify_description(str(desc))
+            result['index'] = idx
+            result['title'] = title
+            result['description_length'] = len(str(desc))
+            result['rerun'] = True
+            results_by_index[idx] = result
+            time.sleep(self.request_delay)
+
+        return [results_by_index[i] for i in sorted(results_by_index)]
+
 
 def main():
     """Main execution.
 
     Usage:
-        python enhanced_classifier.py                  # standard analysis
-        python enhanced_classifier.py --consistency    # inter-rater evaluation
+        python enhanced_classifier.py                        # standard analysis
+        python enhanced_classifier.py --consistency          # inter-rater evaluation
         python enhanced_classifier.py --consistency --rounds 5
         python enhanced_classifier.py --consistency --sample 10
+        python enhanced_classifier.py --rerun path/to/enhanced_classification_results.json
     """
     import argparse
 
@@ -1210,6 +1292,12 @@ def main():
     parser.add_argument(
         '--sample', type=int, default=0,
         help='Evaluate only first N items (0 = all). Useful for quick tests.'
+    )
+    parser.add_argument(
+        '--rerun', type=str, default=None,
+        metavar='JSON_PATH',
+        help='Re-classify high+medium confidence records from existing JSON results '
+             'with structured meta_metaphor output. Merges back with untouched records.'
     )
     args = parser.parse_args()
 
@@ -1237,7 +1325,21 @@ def main():
 
         timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
 
-        if args.consistency:
+        if args.rerun:
+            # --- Rerun mode: re-classify high+medium with structured meta_metaphor ---
+            print(f"RERUN MODE: {args.rerun}")
+            print("Re-classifying high+medium confidence records with structured meta_metaphor...\n")
+            results = classifier.rerun_classification(args.rerun)
+            output_dir = f'rerun_results_{timestamp}'
+            classifier.save_results(results, output_dir, df)
+            classifier.create_enhanced_visualizations(results, output_dir)
+            rerun_count = sum(1 for r in results if r.get('rerun'))
+            print("\n" + "=" * 70)
+            print(f"Rerun complete! Re-classified: {rerun_count} records")
+            print(f"Results saved to: {output_dir}")
+            print("=" * 70)
+
+        elif args.consistency:
             # --- Consistency evaluation mode ---
             print(f"Running consistency evaluation ({args.rounds} rounds)...")
             report = classifier.evaluate_consistency(

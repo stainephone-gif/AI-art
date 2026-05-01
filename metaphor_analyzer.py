@@ -565,7 +565,16 @@ class MetaphorAnalyzer:
 
     def analyze_metaphor_network(self, evidence_list: List[MetaphorEvidence]) -> Dict:
         """
-        Analyze network of metaphors to detect patterns
+        Analyze network of metaphors to detect patterns.
+
+        DEPRECATED (meta_metaphor_detected only):
+            The `meta_metaphor_detected` field produced by this method is always False
+            in practice because it requires co-occurrence of an exact scientific_metaphor
+            phrase AND an exact artistic_transformation phrase within the same context
+            window — a condition almost never satisfied in real curatorial texts.
+            Use `metaphor_analysis.meta_metaphor_detected` from the LLM response instead,
+            which operates at the semantic level and yields empirically valid results.
+            This method is retained as a structural scaffold and for cluster/weight analysis.
         """
         # Group by theory
         theory_clusters = {}
@@ -599,7 +608,8 @@ class MetaphorAnalyzer:
 
             analysis['clusters'][theory] = cluster_analysis
 
-            # Detect meta-metaphor pattern (scientific + artistic transformation)
+            # DEPRECATED: This co-occurrence condition is almost never satisfied
+            # in real texts. Kept for structural integrity; do not rely on this signal.
             if meta_metaphors and scientific_metaphors:
                 analysis['meta_metaphor_detected'] = True
 
