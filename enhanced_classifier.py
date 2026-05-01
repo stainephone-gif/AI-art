@@ -227,10 +227,17 @@ class EnhancedMetaphorClassifier:
         self.base_url = os.getenv(
             'API_BASE_URL', 'https://openrouter.ai/api/v1/chat/completions'
         )
-        self.model = os.getenv('OPENROUTER_MODEL', 'anthropic/claude-3.5-sonnet')
+        self.model = os.getenv('OPENROUTER_MODEL', '')
 
         if not self.api_key:
             raise ValueError("OPENROUTER_API_KEY not found in .env file")
+        if not self.model:
+            raise ValueError(
+                "OPENROUTER_MODEL not set in .env. "
+                "Use a versioned model ID for reproducibility, e.g.: "
+                "anthropic/claude-sonnet-4-5-20250929  "
+                "Check https://openrouter.ai/models for current versioned IDs."
+            )
 
         self.request_delay = float(os.getenv('RATE_LIMIT_DELAY', '2.0'))
 
@@ -659,7 +666,8 @@ class EnhancedMetaphorClassifier:
         print(f"  All retries exhausted. Using local fallback classification.")
         fallback = self._build_fallback_from_pre_analysis(metaphor_hints, description)
         fallback['error'] = last_error or 'Max retries exceeded'
-        fallback['classifier_version'] = self.CLASSIFIER_VERSION + '-fallback'
+        fallback['classifier_version'] = self.CLASSIFIER_VERSION
+        fallback['fallback'] = True
         fallback['model'] = self.model
         return fallback
 
@@ -1029,7 +1037,12 @@ class EnhancedMetaphorClassifier:
                         time.sleep(1)
                         continue
                     classification = self._validate_classification(classification)
+                    classification = self._annotate_quote_verification(
+                        classification, description
+                    )
                     classification['metaphor_pre_analysis'] = metaphor_hints
+                    classification['classifier_version'] = self.CLASSIFIER_VERSION
+                    classification['model'] = self.model
                     return classification
                 elif response.status_code == 429:
                     time.sleep(10 * (2 ** attempt))
@@ -1038,6 +1051,9 @@ class EnhancedMetaphorClassifier:
                 time.sleep(10 * (2 ** attempt))
 
         fallback = self._build_fallback_from_pre_analysis(metaphor_hints, description)
+        fallback['classifier_version'] = self.CLASSIFIER_VERSION
+        fallback['fallback'] = True
+        fallback['model'] = self.model
         return fallback
 
     @staticmethod
