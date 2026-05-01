@@ -277,10 +277,103 @@ class EnhancedMetaphorClassifier:
 
     # --- JSON Validation & Fallback ---
 
+    CLASSIFIER_VERSION = "v2.0-structured-meta-metaphor-2026-05"
+
     VALID_CLASSES = {'COMP', 'IIT', 'PRED', 'GWT', 'ENACT', 'PAN', 'EMERG', 'UND'}
     VALID_CONFIDENCE = {'high', 'medium', 'low'}
     VALID_METAPHOR_LEVELS = {'explicit_term', 'scientific_metaphor', 'meta_metaphor', 'nested_metaphor'}
     VALID_METAPHOR_TYPES = {'ontological', 'structural', 'orientational', 'decorative'}
+
+    # --- Verbatim quote verification ---
+
+    @staticmethod
+    def _normalize_for_match(s: str) -> str:
+        """Lowercase, strip punctuation, collapse whitespace."""
+        s = s.lower()
+        s = re.sub(r'[^\w\s]', ' ', s, flags=re.UNICODE)
+        s = re.sub(r'\s+', ' ', s).strip()
+        return s
+
+    def _verify_phrase_in_source(self, phrase: str, source_text: str,
+                                   token_overlap_threshold: float = 0.7) -> Dict:
+        """
+        Verify that a quoted phrase actually exists in the source text.
+        Returns metadata dict so downstream code can audit / filter.
+
+        Methods (in order of strictness):
+          - exact:           normalized substring match
+          - token_overlap:   fraction of phrase tokens (>2 chars) present in source
+        """
+        if not phrase or not phrase.strip():
+            return {'verified': True, 'token_overlap': 1.0, 'method': 'empty'}
+
+        norm_phrase = self._normalize_for_match(phrase)
+        norm_source = self._normalize_for_match(source_text)
+
+        if not norm_phrase:
+            return {'verified': True, 'token_overlap': 1.0, 'method': 'empty_after_norm'}
+
+        if norm_phrase in norm_source:
+            return {'verified': True, 'token_overlap': 1.0, 'method': 'exact'}
+
+        phrase_tokens = [t for t in norm_phrase.split() if len(t) > 2]
+        if not phrase_tokens:
+            return {'verified': True, 'token_overlap': 1.0, 'method': 'too_short'}
+
+        source_tokens = set(norm_source.split())
+
+        def token_matches(t: str) -> bool:
+            # Exact match
+            if t in source_tokens:
+                return True
+            # Prefix match for words >5 chars (handles Russian inflection:
+            # "генеративная" / "генеративную" share 9-char prefix)
+            if len(t) > 5:
+                prefix = t[:max(5, len(t) - 3)]
+                return any(s.startswith(prefix) for s in source_tokens)
+            return False
+
+        overlap = sum(1 for t in phrase_tokens if token_matches(t)) / len(phrase_tokens)
+
+        return {
+            'verified': overlap >= token_overlap_threshold,
+            'token_overlap': round(overlap, 2),
+            'method': 'token_overlap_with_prefix'
+        }
+
+    def _annotate_quote_verification(self, classification: Dict, description: str) -> Dict:
+        """
+        Add quote_verification metadata to every cited span:
+          - evidence[].quote_verification
+          - metaphor_analysis.meta_metaphor.{source_phrase,transformation_phrase}_verification
+        Also computes aggregate verified_quote_rate at top level.
+        """
+        verified = 0
+        total = 0
+
+        for ev in classification.get('evidence', []):
+            v = self._verify_phrase_in_source(ev.get('span', ''), description)
+            ev['quote_verification'] = v
+            total += 1
+            if v['verified']:
+                verified += 1
+
+        ma = classification.get('metaphor_analysis')
+        if isinstance(ma, dict):
+            mm = ma.get('meta_metaphor')
+            if isinstance(mm, dict):
+                for field in ('source_phrase', 'transformation_phrase'):
+                    v = self._verify_phrase_in_source(mm.get(field, ''), description)
+                    mm[f'{field}_verification'] = v
+                    if mm.get(field, '').strip():
+                        total += 1
+                        if v['verified']:
+                            verified += 1
+
+        classification['verified_quote_rate'] = (
+            round(verified / total, 3) if total else 1.0
+        )
+        return classification
 
     @staticmethod
     def _extract_json_from_response(content: str) -> str:
@@ -535,7 +628,12 @@ class EnhancedMetaphorClassifier:
 
                     # Validate & repair
                     classification = self._validate_classification(classification)
+                    classification = self._annotate_quote_verification(
+                        classification, description
+                    )
                     classification['metaphor_pre_analysis'] = metaphor_hints
+                    classification['classifier_version'] = self.CLASSIFIER_VERSION
+                    classification['model'] = self.model
                     return classification
 
                 elif response.status_code == 429:
@@ -561,6 +659,8 @@ class EnhancedMetaphorClassifier:
         print(f"  All retries exhausted. Using local fallback classification.")
         fallback = self._build_fallback_from_pre_analysis(metaphor_hints, description)
         fallback['error'] = last_error or 'Max retries exceeded'
+        fallback['classifier_version'] = self.CLASSIFIER_VERSION + '-fallback'
+        fallback['model'] = self.model
         return fallback
 
     def process_excel_file(self, file_path: str) -> pd.DataFrame:
@@ -1227,11 +1327,20 @@ class EnhancedMetaphorClassifier:
     def rerun_classification(
         self,
         existing_json_path: str,
-        excel_path: str = 'combined_ai_preprocessed.xlsx'
+        excel_path: str = 'combined_ai_preprocessed.xlsx',
+        only_high_medium: bool = False
     ) -> List[Dict]:
         """
-        Re-classify only high+medium confidence records from a previous run.
-        Merges new results (with structured meta_metaphor) back with untouched low/error records.
+        Re-classify records from a previous run with the current classifier version.
+
+        Default: re-classifies ALL non-error/skipped records (full corpus).
+            This guarantees a homogeneous classifier_version across the dataset
+            and enables aggregate reporting on meta_metaphor.* fields.
+
+        only_high_medium=True: re-classify only high+medium confidence records,
+            leaving low-confidence records on their original classifier_version.
+            Use only if cost/time is a hard constraint AND your downstream analysis
+            explicitly handles the mixed corpus by filtering on classifier_version.
         """
         with open(existing_json_path, encoding='utf-8') as f:
             existing: List[Dict] = json.load(f)
@@ -1240,14 +1349,22 @@ class EnhancedMetaphorClassifier:
         descriptions = df['combined_description'].tolist()
         titles = df.get('title', [f'Item_{i}' for i in range(len(descriptions))]).tolist()
 
-        rerun_indices = {
-            r['index'] for r in existing
-            if r.get('confidence') in ('high', 'medium')
-            and r.get('status') not in ('error', 'skipped')
-        }
+        if only_high_medium:
+            rerun_indices = {
+                r['index'] for r in existing
+                if r.get('confidence') in ('high', 'medium')
+                and r.get('status') not in ('error', 'skipped')
+            }
+            mode_desc = "high+medium only"
+        else:
+            rerun_indices = {
+                r['index'] for r in existing
+                if r.get('status') not in ('error', 'skipped')
+            }
+            mode_desc = "full corpus"
 
-        print(f"Re-classifying {len(rerun_indices)} high+medium confidence records "
-              f"({len(existing) - len(rerun_indices)} low/error kept as-is)...")
+        print(f"Re-classifying {len(rerun_indices)} records ({mode_desc}); "
+              f"{len(existing) - len(rerun_indices)} kept as-is (errors/skipped)...")
 
         results_by_index: Dict[int, Dict] = {r['index']: r for r in existing}
 
@@ -1296,8 +1413,15 @@ def main():
     parser.add_argument(
         '--rerun', type=str, default=None,
         metavar='JSON_PATH',
-        help='Re-classify high+medium confidence records from existing JSON results '
-             'with structured meta_metaphor output. Merges back with untouched records.'
+        help='Re-classify ALL records from existing JSON results with structured '
+             'meta_metaphor output. Default: full corpus reclassification for a '
+             'homogeneous classifier_version.'
+    )
+    parser.add_argument(
+        '--rerun-only-high-medium', action='store_true',
+        help='With --rerun: only re-classify high+medium confidence records. '
+             'WARNING: produces a mixed corpus (records with different '
+             'classifier_version) — handle in downstream analysis accordingly.'
     )
     args = parser.parse_args()
 
@@ -1326,16 +1450,23 @@ def main():
         timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
 
         if args.rerun:
-            # --- Rerun mode: re-classify high+medium with structured meta_metaphor ---
+            # --- Rerun mode: re-classify with structured meta_metaphor ---
             print(f"RERUN MODE: {args.rerun}")
-            print("Re-classifying high+medium confidence records with structured meta_metaphor...\n")
-            results = classifier.rerun_classification(args.rerun)
+            mode = "high+medium only" if args.rerun_only_high_medium else "full corpus"
+            print(f"Mode: {mode}\n")
+            results = classifier.rerun_classification(
+                args.rerun, only_high_medium=args.rerun_only_high_medium
+            )
             output_dir = f'rerun_results_{timestamp}'
             classifier.save_results(results, output_dir, df)
             classifier.create_enhanced_visualizations(results, output_dir)
             rerun_count = sum(1 for r in results if r.get('rerun'))
+            v_rates = [r.get('verified_quote_rate') for r in results
+                       if r.get('verified_quote_rate') is not None]
+            avg_v_rate = sum(v_rates) / len(v_rates) if v_rates else 0
             print("\n" + "=" * 70)
             print(f"Rerun complete! Re-classified: {rerun_count} records")
+            print(f"Avg verified_quote_rate: {avg_v_rate:.1%}")
             print(f"Results saved to: {output_dir}")
             print("=" * 70)
 
