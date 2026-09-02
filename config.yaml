@@ -1,0 +1,84 @@
+# Конфигурация пайплайна v3. Все пути относительно корня репозитория.
+# Запуск: python -m pipeline.<module> --config config.yaml
+
+seed: 42
+
+corpus:
+  path: combined_ai_preprocessed.xlsx
+  sheet: data
+  text_column: descr_clean          # основной текст (без артефактов _x000D_)
+  fallback_text_column: descr       # если descr_clean пуст
+  title_column: title
+  source_column: __source
+  author_column: descr_author
+
+paths:
+  prompts_dir: prompts
+  runs_dir: runs
+  reports_dir: reports
+  annotation_sheet: reports/annotation_sheet.xlsx
+  annotation_filled: reports/annotation_sheet_filled.xlsx   # заполненная людьми таблица (для import_annotation)
+
+llm:
+  provider: openrouter              # openrouter | mock  (mock — детерминированная заглушка для тестов и проверки пайплайна без API)
+  base_url: https://openrouter.ai/api/v1/chat/completions
+  api_key_env: OPENROUTER_API_KEY
+  temperature: 0.0
+  max_tokens: 4000
+  timeout: 120
+  max_retries: 4
+  request_delay: 1.0                # секунд между запросами
+  response_format_json: true        # передавать response_format={"type":"json_object"}; отключите, если провайдер не поддерживает
+  send_seed: true                   # передавать seed (поддерживается не всеми провайдерами; фиксируется там, где поддерживается)
+
+# Минимум три модели через OpenRouter, один промпт, temperature 0, два повтора.
+# Используйте версионированные ID там, где они есть (алиасы дрейфуют).
+models:
+  - id: anthropic/claude-sonnet-4.6
+    slug: claude-sonnet-4.6
+  - id: openai/gpt-4.1
+    slug: gpt-4.1
+  - id: deepseek/deepseek-v3.2
+    slug: deepseek-v3.2
+repeats: 2
+
+prompts:
+  theory: theory_v3.md
+  hardproblem: hardproblem_v1.md
+  codebook: codebook.md
+
+verification:
+  token_overlap_threshold: 0.7      # как в v2: точное вхождение или доля токенов (с префиксным матчингом)
+  require_exact: false              # true — засчитывать только точные (нормализованные) вхождения
+  min_span_words: 2                 # фрагменты короче отбрасываются (одиночные слова не образуют переноса)
+  require_exclusion_checked: true   # отбрасывать evidence без exclusion_checked: true (ТЗ 2.4); false — только помечать
+
+aggregation:
+  secondary_min_spans: 2            # вторичная метка: n_spans >= 2 ...
+  secondary_density_threshold: 1.0  # ... и density >= порог (фрагментов на 100 слов)
+  confidence_thresholds:            # confidence вычисляется из n_spans primary-класса
+    medium: 2
+    high: 3
+
+consensus:
+  min_models_agree: 2               # класс присваивается, если совпал у >= N моделей; иначе UND + disputed
+
+annotation:
+  und_sample_fraction: 0.30         # доля UND-текстов (от числа не-UND), добавляемых в выборку, стратифицированно по источнику
+
+# Старые прогоны для документирования (agreement.py включает их как legacy).
+# Отсутствующие файлы пропускаются с предупреждением.
+legacy_runs:
+  - name: legacy_deepseek-v3.2_2025-12
+    path: runs/legacy_deepseek-v3.2_20251204/classification_results.json
+    model: deepseek/deepseek-v3.2
+    prompt_version: v1 (legacy/openrouter_classifier.py)
+  - name: legacy_claude-sonnet-4.6_2026-05
+    path: runs/legacy_claude-sonnet-4.6_202605/enhanced_classification_results.json
+    model: anthropic/claude-sonnet-4.6
+    prompt_version: v2 (legacy/enhanced_classifier.py)
+
+stats:
+  n_permutations: 10000
+  n_mc_tables: 10000
+  length_unit_words: 100            # логистическая регрессия: коэффициент на +N слов
