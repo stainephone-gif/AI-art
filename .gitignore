@@ -42,9 +42,15 @@ llm_class-env/
 # Environment variables
 .env
 
-# Analysis results
+# Старые каталоги результатов (v1/v2)
 analysis_results_*/
 enhanced_analysis_results_*/
+rerun_results_*/
+consistency_results_*/
+
+# v3: кеш сырых ответов моделей и кеш live-тестов (результаты runs/*/theory_r*.json коммитятся)
+runs/*/cache/
+runs/_tests_cache/
 
 # Jupyter
 .ipynb_checkpoints/
